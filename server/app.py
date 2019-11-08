@@ -7,10 +7,12 @@ import os
 
 import uvicorn
 from fastapi import FastAPI
-from starlette.responses import HTMLResponse
+from starlette.responses import RedirectResponse
+from starlette.staticfiles import StaticFiles
 
 HTTP_HOST = os.environ.get("HTTP_HOST", "localhost")
 HTTP_PORT = int(os.environ.get("HTTP_PORT", "8080"))
+DEV_MODE = "DEV_MODE" in os.environ
 
 app = FastAPI(
     title="Browserprint Server API",
@@ -18,18 +20,15 @@ app = FastAPI(
 )
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=RedirectResponse)
 async def index():
-    return """\
-<html>
-    <head>
-        <title>Browserprint</title>
-    </head>
-    <body>
-        <h1>Browserprint</h1>
-    </body>
-</html>"""
+    return RedirectResponse("/static/allthethings.html")
 
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host=HTTP_HOST, port=HTTP_PORT)
+    if DEV_MODE:
+        uvicorn.run(app, host=HTTP_HOST, port=HTTP_PORT, reload=True, log_level="debug")
+    else:
+        uvicorn.run(app, host=HTTP_HOST, port=HTTP_PORT)
