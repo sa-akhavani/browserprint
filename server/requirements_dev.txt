@@ -1,0 +1,4 @@
+-r requirements.txt
+black>=19.10b0
+mypy>=0.740
+rope>=0.14.0
