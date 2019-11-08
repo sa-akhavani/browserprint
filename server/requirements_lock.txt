@@ -3,6 +3,8 @@ Click==7.0
 fastapi==0.42.0
 h11==0.8.1
 httptools==0.0.13
+Jinja2==2.10.3
+MarkupSafe==1.1.1
 pydantic==0.32.2
 starlette==0.12.9
 uvicorn==0.10.3

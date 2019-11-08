@@ -1,38 +1,77 @@
-(function() {
+(function () {
     function getAllTheThings() {
         var seenSeed = 0;
-        var seen = new Map();
+        var seen = new WeakMap();
 
         function walkObject(object, prefix) {
             if (seen.has(object)) {
-                return `<cycle>`
+                return { cycle: seen.get(object) };
             } else {
                 var id = ++seenSeed;
                 seen.set(object, id);
+
+                var vals = {};
                 var props = Object.getOwnPropertyDescriptors(object);
-                var vals = [];
                 for (var name in props) {
-                    var d = props[name];
-                    var v = ('value' in d) ? d.value : `${d.get.name}()`;
-                    if (typeof v === 'object') {
-                        vals.push([`${prefix}.${name}`, walkObject(v, prefix + '.' + name)]);
-                    } else if (typeof v === 'function') {
-                        if ('prototype' in v && (v.prototype !== object)) {
-                            vals.push([`${prefix}.${name}`, `${v.name}()`, walkObject(v.prototype, `${prefix}.${name}.prototype`)]);
+                    var newName = prefix + '.' + name;
+                    var d = props[name], result;
+                    if ('value' in d) {
+                        var v = d.value;
+                        if (typeof v === 'object') {
+                            if (seen.has(v)) {
+                                result = { cycle: seen.get(v) };
+                            } else {
+                                result = { 'object': walkObject(v, newName) };
+                            }
+                        } else if (typeof v == 'function') {
+                            if (seen.has(v)) {
+                                result = { cycle: seen.get(v) };
+                            } else {
+                                result = { 'function': walkObject(v, newName) };
+                            }
                         } else {
-                            vals.push([`${prefix}.${name}`, `${v.name}()`]);
+                            result = v;
                         }
                     } else {
-                        vals.push([`${prefix}.${name}`, v]);
+                        result = { 'function': walkObject(d.get, prefix + '.get ' + name) };
                     }
+                    vals[prefix + '.' + name] = result;
                 }
-                vals.sort();
+                vals.id = id;
                 return vals;
             }
         }
-        var wat = walkObject(window, '');
-        console.log(wat);
-        document.body.appendChild(document.createTextNode(JSON.stringify(wat)));
+        var tree = { 'globalObject': walkObject(window, 'window') };
+
+        var output = document.getElementById('results');
+        if (output) {
+            output.appendChild(document.createTextNode(JSON.stringify(tree, null, 2)));
+        } else {
+            console.error('unable to find output element');
+        }
+
+        var script = document.getElementById('allthethings');
+        if (script && script.hasAttribute('data-uuid')) {
+            var uuid = script.getAttribute('data-uuid');
+            fetch("/report", {
+                method: "POST",
+                body: JSON.stringify({
+                    uuid: uuid,
+                    browser: {
+                        vendor: navigator.vendor,
+                        platform: navigator.platform,
+                        userAgent: navigator.userAgent,
+                    },
+                    features: tree,
+                }),
+            }).then(response => response.text()).then(text => {
+                console.log(text);
+            }).catch(err => {
+                console.error(err)
+            })
+        } else {
+            console.error('unable to find job UUID');
+        }
     }
     window.addEventListener('load', getAllTheThings);
 })();
