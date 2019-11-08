@@ -5,7 +5,9 @@ h11==0.8.1
 httptools==0.0.13
 Jinja2==2.10.3
 MarkupSafe==1.1.1
+motor==2.0.0
 pydantic==0.32.2
+pymongo==3.9.0
 starlette==0.12.9
 uvicorn==0.10.3
 uvloop==0.14.0rc2

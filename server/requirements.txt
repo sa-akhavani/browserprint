@@ -2,3 +2,4 @@ fastapi>=0.42.0
 uvicorn>=0.10.3
 aiofiles>=0.4.0
 Jinja2>=2.10.3
+motor>=2.0.0

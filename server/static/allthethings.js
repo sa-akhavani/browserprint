@@ -17,7 +17,7 @@
                     var d = props[name], result;
                     if ('value' in d) {
                         var v = d.value;
-                        if (typeof v === 'object') {
+                        if (typeof v === 'object' && v) {
                             if (seen.has(v)) {
                                 result = { cycle: seen.get(v) };
                             } else {
@@ -51,12 +51,12 @@
         }
 
         var script = document.getElementById('allthethings');
-        if (script && script.hasAttribute('data-uuid')) {
-            var uuid = script.getAttribute('data-uuid');
+        if (script && script.hasAttribute('data-brid')) {
+            var brid = script.getAttribute('data-brid');
             fetch("/report", {
                 method: "POST",
                 body: JSON.stringify({
-                    uuid: uuid,
+                    brid: brid,
                     browser: {
                         vendor: navigator.vendor,
                         platform: navigator.platform,
