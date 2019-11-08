@@ -11,6 +11,8 @@ RUN pip3 install --user -r requirements_lock.txt
 
 # Install application files/resources
 COPY app.py /browserprint/
+COPY static/ /browserprint/static/
+COPY templates/ /browserprint/templates/
 
 # ENV inputs and EXPOSEd ports
 ENV HTTP_HOST localhost

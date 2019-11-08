@@ -14,7 +14,7 @@ from typing import List, Optional, Tuple
 # Third-party imports
 import uvicorn
 from fastapi import FastAPI
-from motor.motor_asyncio import AsyncIOMotorClient
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from pydantic import BaseModel
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
@@ -36,9 +36,24 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # Global template engine
 templates = Jinja2Templates(directory="templates")
 
-# Global handle to MongoDB
-mongo_session = AsyncIOMotorClient(MONGO_URL)
-mongo_db = mongo_session.get_database()
+# Global handles to MongoDB (must be initialized on main event loop)
+mongo_session: AsyncIOMotorClient
+mongo_db: AsyncIOMotorDatabase
+
+
+@app.on_event("startup")
+async def startup():
+    global mongo_session, mongo_db
+    mongo_session = AsyncIOMotorClient(MONGO_URL)
+    mongo_db = mongo_session.get_database()
+    logging.info(f"session created for {MONGO_URL}")
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    logging.info("closing database session...")
+    mongo_session.close()
+    logging.info("done closing database session")
 
 
 # Web/API handlers
