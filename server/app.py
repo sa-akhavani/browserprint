@@ -13,6 +13,7 @@ from typing import List, Optional, Tuple
 
 # Third-party imports
 import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from pydantic import BaseModel
@@ -22,6 +23,7 @@ from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
 # Tuning knobs
+load_dotenv()
 HTTP_HOST = os.environ.get("HTTP_HOST", "localhost")
 HTTP_PORT = int(os.environ.get("HTTP_PORT", "8080"))
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost/browserprint")
