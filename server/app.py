@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 """Browserprint app server/endpoint.
 """
-from __future__ import annotations
-
 # Stdlib imports
 import datetime
 import logging
 import os
 import uuid
-from numbers import Number
 from typing import List, Optional, Tuple
 
 # Third-party imports
 import uvicorn
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from pydantic import BaseModel
 from starlette.requests import Request
@@ -27,6 +24,8 @@ load_dotenv()
 HTTP_HOST = os.environ.get("HTTP_HOST", "localhost")
 HTTP_PORT = int(os.environ.get("HTTP_PORT", "8080"))
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost/browserprint")
+SECRET_PREFIX = os.environ.get("SECRET_PREFIX", "/not-really-that-secret-when-testing")
+
 
 # Global FastAPI/Starlette application instance
 app = FastAPI(
@@ -34,6 +33,7 @@ app = FastAPI(
     description="Serves instrumented web page and collects data reported from it.",
 )
 app.mount("/static", StaticFiles(directory="static"), name="static")
+router = APIRouter()
 
 # Global template engine
 templates = Jinja2Templates(directory="templates")
@@ -58,8 +58,8 @@ async def shutdown():
     logging.info("done closing database session")
 
 
-# Web/API handlers
-###################
+# Main Web Entry Points
+##########################
 
 
 class StatusMessage(BaseModel):
@@ -78,7 +78,7 @@ class BrowserprintFullReport(BrowserprintReport):
     headers: List[Tuple[str, str]]
 
 
-@app.get("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     brid = uuid.uuid4()
     result = await mongo_db["reports"].insert_one(
@@ -95,7 +95,7 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "brid": brid})
 
 
-@app.post("/report", response_model=StatusMessage)
+@router.post("/report", response_model=StatusMessage)
 async def post_report(report: BrowserprintReport):
     logging.info(
         f"reporting {report.brid}: got {len(report.features)}-member JSON map with {report.browser}"
@@ -110,7 +110,7 @@ async def post_report(report: BrowserprintReport):
         return {"ok": False, "msg": f"unable to find unfulfilled report {report.brid}"}
 
 
-@app.get("/report", response_model=List[uuid.UUID])
+@router.get("/report", response_model=List[uuid.UUID])
 async def list_reports():
     reports = (
         await mongo_db["reports"]
@@ -121,10 +121,14 @@ async def list_reports():
     return [r["brid"] for r in reports]
 
 
-@app.get("/report/{brid}", response_model=BrowserprintFullReport)
+@router.get("/report/{brid}", response_model=BrowserprintFullReport)
 async def get_report(brid: uuid.UUID):
     return await mongo_db["reports"].find_one({"brid": brid})
 
 
+# Now that the router is complete, wire it up into the app
+app.include_router(router, prefix=SECRET_PREFIX)
+
+
 if __name__ == "__main__":
-    uvicorn.run(app, host=HTTP_HOST, port=HTTP_PORT)
+    uvicorn.run(app, host=HTTP_HOST, port=HTTP_PORT, proxy_headers=True)
