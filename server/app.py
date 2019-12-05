@@ -83,6 +83,7 @@ async def index(request: Request):
     brid = uuid.uuid4()
     result = await mongo_db["reports"].insert_one(
         {
+            "state": "initiated",
             "brid": brid,
             "headers": request.headers.items(),
             "when": datetime.datetime.now(),
@@ -101,20 +102,29 @@ async def post_report(report: BrowserprintReport):
         f"reporting {report.brid}: got {len(report.features)}-member JSON map with {report.browser}"
     )
     result = await mongo_db["reports"].update_one(
-        {"brid": report.brid, "features": {"$exists": False}},
-        {"$set": {"browser": report.browser, "features": report.features,}},
+        {"brid": report.brid, "state": "initiated"},
+        {
+            "$set": {
+                "state": "completed",
+                "browser": report.browser,
+                "features": report.features,
+            }
+        },
     )
     if result.modified_count == 1:
         return {"ok": True}
     else:
-        return {"ok": False, "msg": f"unable to find unfulfilled report {report.brid}"}
+        return {
+            "ok": False,
+            "msg": f"unable to find 'initiated' (i.e., incomplete) report {report.brid}",
+        }
 
 
 @router.get("/report", response_model=List[uuid.UUID])
 async def list_reports():
     reports = (
         await mongo_db["reports"]
-        .find({}, {"_id": 0, "brid": 1, "when": 1})
+        .find({"state": "completed"}, {"_id": 0, "brid": 1, "when": 1})
         .sort([("when", -1)])
         .to_list(None)
     )

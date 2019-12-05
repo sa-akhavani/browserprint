@@ -7,6 +7,8 @@
 
 <body>
     <h1>Browserprint</h1>
+    <span id="success-banner"></span>
+    <span id="failure-banner" style="color: red; font-weight: bold;"></span>
     <hr>
     <pre id="results"></pre>
     <script id="allthethings" src="{{ url_for('static', path='/allthethings.js') }}" data-brid="{{ brid }}"></script>
