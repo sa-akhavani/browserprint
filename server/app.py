@@ -31,6 +31,9 @@ SECRET_PREFIX = os.environ.get("SECRET_PREFIX", "/not-really-that-secret-when-te
 app = FastAPI(
     title="Browserprint Server API",
     description="Serves instrumented web page and collects data reported from it.",
+    openapi_url=f"{SECRET_PREFIX}/openapi.json",
+    docs_url=f"{SECRET_PREFIX}/docs",
+    redoc_url=None,
 )
 app.mount("/static", StaticFiles(directory="static"), name="static")
 router = APIRouter()
