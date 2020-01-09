@@ -127,8 +127,14 @@ async def post_report(report: BrowserprintReport):
 async def list_reports():
     reports = (
         await mongo_db["reports"]
-        .find({"state": "completed"}, {"_id": 0, "brid": 1, "when": 1})
-        .sort([("when", -1)])
+        .aggregate(
+            [
+                {"$match": {"state": "completed"}},
+                {"$project": {"_id": 0, "brid": 1, "when": 1}},
+                {"$sort": {"when": -1}},
+            ],
+            allowDiskUse=True,
+        )
         .to_list(None)
     )
     return [r["brid"] for r in reports]
