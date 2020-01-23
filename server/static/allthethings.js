@@ -1,14 +1,14 @@
 (function() {
     function getAllTheThings() {
         var seenSeed = 0;
-        var seen = new WeakMap();
+        var seenKey = Symbol("we've seen this object");
 
         function walkObject(object, prefix) {
-            if (seen.has(object)) {
-                return { cycle: seen.get(object) };
+            if (seenKey in object) {
+                return { cycle: object[seenKey] }
             } else {
                 var id = ++seenSeed;
-                seen.set(object, id);
+                object[seenKey] = id;
 
                 var vals = {};
                 var props = Object.getOwnPropertyDescriptors(object);
@@ -19,14 +19,14 @@
                     if ('value' in d) {
                         var v = d.value;
                         if (typeof v === 'object' && v) {
-                            if (seen.has(v)) {
-                                result = { cycle: seen.get(v) };
+                            if (seenKey in v) {
+                                result = { cycle: v[seenKey] };
                             } else {
                                 result = { 'object': walkObject(v, newName) };
                             }
                         } else if (typeof v == 'function') {
-                            if (seen.has(v)) {
-                                result = { cycle: seen.get(v) };
+                            if (seenKey in v) {
+                                result = { cycle: v[seenKey] };
                             } else {
                                 result = { 'function': walkObject(v, newName) };
                             }
