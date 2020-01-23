@@ -3,12 +3,25 @@
         var seenSeed = 0;
         var seenKey = Symbol("we've seen this object");
 
+        function hasSeen(object) {
+            return object.hasOwnProperty(seenKey)
+        }
+
+        function seeObject(object) {
+            var id = ++seenSeed;
+            object[seenKey] = id;
+            return id;
+        }
+
+        function objectId(object) {
+            return object.hasOwnProperty(seenKey) ? object[seenKey] : undefined;
+        }
+
         function walkObject(object, prefix) {
-            if (seenKey in object) {
-                return { cycle: object[seenKey] }
+            if (hasSeen(object)) {
+                return { cycle: objectId(object) };
             } else {
-                var id = ++seenSeed;
-                object[seenKey] = id;
+                var id = seeObject(object);
 
                 var vals = {};
                 var props = Object.getOwnPropertyDescriptors(object);
@@ -19,14 +32,14 @@
                     if ('value' in d) {
                         var v = d.value;
                         if (typeof v === 'object' && v) {
-                            if (seenKey in v) {
-                                result = { cycle: v[seenKey] };
+                            if (hasSeen(v)) {
+                                result = { cycle: objectId(v) };
                             } else {
                                 result = { 'object': walkObject(v, newName) };
                             }
                         } else if (typeof v == 'function') {
-                            if (seenKey in v) {
-                                result = { cycle: v[seenKey] };
+                            if (hasSeen(v)) {
+                                result = { cycle: objectId(v) };
                             } else {
                                 result = { 'function': walkObject(v, newName) };
                             }
