@@ -11,6 +11,12 @@
     <span id="failure-banner" style="color: red; font-weight: bold;"></span>
     <hr>
     <pre id="results"></pre>
+
+    <!-- polyfill all the things (fetch, console, and ES5/ES2015-18 shims) -->
+    <script crossorigin="anonymous"
+        src="https://polyfill.io/v3/polyfill.min.js?features=es5%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Cconsole%2Cfetch"></script>
+
+    <!-- The actual payload -->
     <script id="allthethings" src="{{ url_for('static', path='/allthethings.js') }}" data-brid="{{ brid }}"></script>
 </body>
 

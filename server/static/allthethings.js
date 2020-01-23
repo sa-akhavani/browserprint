@@ -1,4 +1,4 @@
-(function () {
+(function() {
     function getAllTheThings() {
         var seenSeed = 0;
         var seen = new WeakMap();
@@ -14,7 +14,8 @@
                 var props = Object.getOwnPropertyDescriptors(object);
                 for (var name in props) {
                     var newName = prefix + '.' + name;
-                    var d = props[name], result;
+                    var d = props[name],
+                        result;
                     if ('value' in d) {
                         var v = d.value;
                         if (typeof v === 'object' && v) {
@@ -64,21 +65,20 @@
                     },
                     features: tree,
                 }),
-            }).then(async (response) => {
+            }).then(function(response) {
                 var ok = (Math.floor(response.status / 100) == 2);
-                var body = await response.text();
-
-                if (ok) {
-                    var permaLink = document.createElement("a");
-                    permaLink.href = "report/" + brid;
-                    permaLink.innerText = "Browserprint " + brid + " saved; click here for permalink";
-                    document.getElementById("success-banner").appendChild(permaLink);
-                    console.log(brid);
-                } else {
-                    throw new Error(body);
-                }
-
-            }).catch(err => {
+                return response.text().then(function(body) {
+                    if (ok) {
+                        var permaLink = document.createElement("a");
+                        permaLink.href = "report/" + brid;
+                        permaLink.innerText = "Browserprint " + brid + " saved; click here for permalink";
+                        document.getElementById("success-banner").appendChild(permaLink);
+                        console.log(brid);
+                    } else {
+                        throw new Error(body);
+                    }
+                });
+            }).catch(function(err) {
                 console.error("error", err);
 
                 var oopsie = document.createElement("p");
