@@ -58,7 +58,7 @@ async function extractFeatureNames(featuresObject) {
     for(f of featuresList) {
         featuresSet.add(f);
     }
-    return featuresSet;
+    return {featuresList, featuresSet};
 }
 
 async function parseFile(filePath) {
@@ -70,38 +70,18 @@ async function parseFile(filePath) {
 
 async function main() {
     let browserReportFileList = fs.readdirSync(reportsDir)
-    let allFeatures = new Set();
-    let uniqueFeatures = new Set();
-    let commonFeatures = new Set();
-    let uncommonFeatures = new Set();
     let finalReport = [];
     for (let browserFile of browserReportFileList) {
         let featuresObject = await parseFile(reportsDir + '/' + browserFile);
-        console.log('Victim: ', browserFile)
-        let featuresList = await extractFeatureNames(featuresObject);
+        let {featuresList, featuresSet} = await extractFeatureNames(featuresObject);
         let browserFeatureData = {
             browser: browserFile,
+            featuresSet: featuresSet,
             featuresList: featuresList
         };
         finalReport.push(browserFeatureData);
-
-
-        // console.log(finalReport)
-        // for (feature of featuresNames) {
-        //     if (allFeatures.has(feature)) {
-        //         uniqueFeatures.delete(feature);
-        //     } else {
-        //         allFeatures.add(feature);
-        //         uniqueFeatures.add(feature);
-        //     }
-        //     if (i == 0)
-        //         commonFeatures.add(feature);
-        // }        
-        // commonFeatures = intersection(commonFeatures, featuresNames);
-        // uncommonFeatures = difference(allFeatures, commonFeatures);
     }
-    console.log(finalReport)
-    // console.log(uncommonFeatures);
+    console.log(JSON.stringify(finalReport))
 }
 
 
