@@ -15,9 +15,8 @@ async function union(setA, setB) {
 async function intersection(setA, setB) {
     let _intersection = new Set();
     for (let elem of setB) {
-        if (setA.has(elem)) {
+        if (setA.has(elem))
             _intersection.add(elem)
-        }
     }
     return _intersection
 }
@@ -25,11 +24,20 @@ async function intersection(setA, setB) {
 async function difference(setA, setB) {
     let _difference = new Set(setA);
     for (let elem of setB) {
-        if (_difference.has(elem)) {
+        if (_difference.has(elem))
             _difference.delete(elem)
-        }
     }
     return _difference
+}
+
+async function isSame(setA, setB) {
+    if (setA.size !== setB.size)
+        return false;
+    for (elem of setA) {
+        if (!setB.has(elem))
+            return false;
+    }
+    return true;
 }
 
 function isNameKey(keyName) {
@@ -44,17 +52,14 @@ async function doreBatel(featuresObject) {
         if (typeof featuresObject[featureField] === 'object') {
             let feature = featuresObject[featureField];
             for (let field in feature) {
-                if (isNameKey(field)) {
+                if (isNameKey(field))
                     stack.push(field.replace('.name', ''));
-                } else if (typeof feature[field] === 'object') {
+                else if (typeof feature[field] === 'object')
                     await doreBatel(feature[field])
-                }
             }
-        }
-        else {
-            if (isNameKey(featureField)) {
+        } else {
+            if (isNameKey(featureField))
                 stack.push(featureField.replace('.name', ''));
-            }
         }
     }
 }
@@ -63,12 +68,11 @@ async function extractFeatureNames(featuresObject) {
     stack = [];
     await doreBatel(featuresObject);
     let featuresList = stack;
-    // console.dir(featuresList, { maxArrayLength: null });
     featuresSet = new Set()
-    for(let f of featuresList) {
+    for (let f of featuresList) {
         featuresSet.add(f);
     }
-    return {featuresList, featuresSet};
+    return featuresSet;
 }
 
 async function parseFile(filePath) {
@@ -88,70 +92,77 @@ async function commonUncommonFeatures(finalReport) {
             allFeaturesSet.add(feature);
             if (commonFeaturesSet.has(feature)) {
                 commonFeaturesSet.delete(feature);
-            }
-            else {
+            } else {
                 commonFeaturesSet.add(feature);
             }
         }
     }
     uncommonFeaturesSet = await difference(allFeaturesSet, commonFeaturesSet);
-    return {commonFeaturesSet, uncommonFeaturesSet};
+    return {
+        commonFeaturesSet,
+        uncommonFeaturesSet
+    };
 }
 
 async function generateComparisonResults(finalReport) {
-    // let {commonFeaturesSet, uncommonFeaturesSet} = await commonUncommonFeatures(finalReport);
     for (let i = 0; i < finalReport.length; i++) {
-        let A = finalReport[i].featuresSet;
+        let A = finalReport[i].features;
+        finalReport[i].isUnique = true;
         let allFeaturesExceptMe = new Set();
         for (let j = 0; j < finalReport.length; j++) {
             if (i === j)
                 continue;
-            let featuresAdded = new Set();
-            let featuresRemoved = new Set();
-            let commonFeatures = new Set();
-            let B = finalReport[j].featuresSet;
+            let addedFeatures = new Set();
+            let removedFeatures = new Set();
+            let B = finalReport[j].features;
             if (j === i + 1) {
-                featuresAdded = await difference(B, A);
-                featuresRemoved = await difference(A, B);
-                commonFeatures = await intersection(B, A)
-                finalReport[j].featuresAddedSize = featuresAdded.size;
-                finalReport[j].featuresRemovedSize = featuresRemoved.size;
-                finalReport[j].featuresAdded = featuresAdded;
-                finalReport[j].featuresRemoved = featuresRemoved;
+                addedFeatures = await difference(B, A);
+                removedFeatures = await difference(A, B);
+                finalReport[j].addedFeatures = addedFeatures;
+                finalReport[j].removedFeatures = removedFeatures;
+                finalReport[j].addedFeaturesSize = addedFeatures.size;
+                finalReport[j].removedFeaturesSize = removedFeatures.size;
             }
             allFeaturesExceptMe = await union(B, allFeaturesExceptMe);
+            if (await isSame(A, B))
+                finalReport[i].isUnique = false;
         }
-        let report = finalReport[i];
+
         let C = await difference(A, allFeaturesExceptMe);
         let D = await difference(allFeaturesExceptMe, A);
-        let uniqueSet = await union(D, C);
-        finalReport[i].uniqueFeatures = uniqueSet;
-        finalReport[i].uniqueFeaturesSize = uniqueSet.size;
-        // if (report.featuresAdded)
-        //     console.log(`${report.browser}: All: ${report.featuresSet.size} added: ${report.featuresAdded.size}  removed: ${report.featuresRemoved.size} (This-All): ${C.size} (All-This): ${D.size}`);
-        // else
-        //     console.log(`${report.browser}: All: ${report.featuresSet.size} added: 0  removed: 0 (This-All): ${C.size} (All-This): ${D.size}`);
-        // console.log('---------------')
+        let differentFeaturesSet = await union(D, C);
+        finalReport[i].differentFeatures = differentFeaturesSet;
+        finalReport[i].differentFeaturesSize = differentFeaturesSet.size;
+    }
+}
+
+async function printResults(finalReport) {
+    for (report of finalReport) {
+        if (report.addedFeatures)
+            console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: ${report.addedFeatures.size}  RemovedFeaturesSize: ${report.removedFeatures.size}`);
+        else
+            console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: 0  RemovedFeaturesSize: 0`);
+        console.log('---------------')
     }
 }
 
 async function main() {
     repDir = reportsDir + chromeDir;
     // repDir = reportsDir + firefoxDir; // For firefox!
+
     let browserReportFileList = fs.readdirSync(repDir)
     let finalReport = [];
     for (let browserFile of browserReportFileList) {
         let featuresObject = await parseFile(repDir + '/' + browserFile);
-        let {featuresList, featuresSet} = await extractFeatureNames(featuresObject);
+        let featuresSet = await extractFeatureNames(featuresObject);
         let browserFeatureData = {
             browser: browserFile,
-            featuresSet: featuresSet,
-            featuresList: featuresList,
+            features: featuresSet,
         };
         finalReport.push(browserFeatureData);
     }
     await generateComparisonResults(finalReport);
-    console.log(finalReport)
+    await printResults(finalReport);
 }
 
 
