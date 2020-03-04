@@ -137,13 +137,15 @@ async function generateComparisonResults(finalReport) {
 }
 
 async function printResults(finalReport) {
-    for (report of finalReport) {
-        if (report.addedFeatures)
-            console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: ${report.addedFeatures.size}  RemovedFeaturesSize: ${report.removedFeatures.size}`);
-        else
-            console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: 0  RemovedFeaturesSize: 0`);
-        console.log('---------------')
-    }
+    console.log(finalReport)
+//    for (report of finalReport) {
+        // console.log(report);
+        // if (report.addedFeatures)
+        //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: ${report.addedFeatures.size}  RemovedFeaturesSize: ${report.removedFeatures.size}`);
+        // else
+        //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: 0  RemovedFeaturesSize: 0`);
+        // console.log('---------------')
+//    }
 }
 
 async function main() {
