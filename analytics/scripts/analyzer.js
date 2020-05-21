@@ -137,22 +137,92 @@ async function generateComparisonResults(finalReport) {
 }
 
 async function printResults(finalReport) {
-    console.log(finalReport)
-//    for (report of finalReport) {
-        // console.log(report);
-        // if (report.addedFeatures)
-        //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: ${report.addedFeatures.size}  RemovedFeaturesSize: ${report.removedFeatures.size}`);
-        // else
-        //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: 0  RemovedFeaturesSize: 0`);
-        // console.log('---------------')
-//    }
+
+    // Browser-Feature
+    for (report of finalReport) {
+        console.log(`${report.browser}, ${report.features.size}, ${report.addedFeaturesSize}, ${report.removedFeaturesSize}`)
+    }
+
+    // console.log(finalReport)
+    //    for (report of finalReport) {
+    // console.log(report);
+    // if (report.addedFeatures)
+    //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: ${report.addedFeatures.size}  RemovedFeaturesSize: ${report.removedFeatures.size}`);
+    // else
+    //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: 0  RemovedFeaturesSize: 0`);
+    // console.log('---------------')
+    //    }
 }
 
-async function main() {
-    repDir = reportsDir + chromeDir;
-    // repDir = reportsDir + firefoxDir; // For firefox!
+async function printFeatureResults(finalReport) {
+    // feature,numOfAppearance,chromeList,chromeFirst,chromeLast,firefoxList,firefoxFirst,firefoxLast
+    for (report of finalReport) {
+        console.log(`${report.feature},${report.chromelist.length + report.firefoxlist.length},[${report.chromelist}],${report.chromelist[0]},${report.chromelist[report.chromelist.length-1]},[${report.firefoxlist}],${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
+    }
+}
 
-    let browserReportFileList = fs.readdirSync(repDir)
+async function generateFeatureResults() {
+    let allFeaturesSet = new Set();
+    let browserFeatureList = [];
+
+    let chDir = reportsDir + chromeDir;
+    let ffDir = reportsDir + firefoxDir;
+
+    let chReportFileList = fs.readdirSync(chDir);
+    let ffReportFileList = fs.readdirSync(ffDir);
+
+    let finalReport = [];
+
+    for (let browserFile of chReportFileList) {
+        let featuresObject = await parseFile(chDir + '/' + browserFile);
+        let featuresSet = await extractFeatureNames(featuresObject);
+        allFeaturesSet = await union(allFeaturesSet, featuresSet);
+        let browserFeatureData = {
+            browser: browserFile,
+            features: featuresSet,
+        };
+        browserFeatureList.push(browserFeatureData);
+    }
+
+    for (let browserFile of ffReportFileList) {
+        let featuresObject = await parseFile(ffDir + '/' + browserFile);
+        let featuresSet = await extractFeatureNames(featuresObject);
+        allFeaturesSet = await union(allFeaturesSet, featuresSet);
+        let browserFeatureData = {
+            browser: browserFile,
+            features: featuresSet,
+        };
+        browserFeatureList.push(browserFeatureData);
+    }
+
+    for (let feature of allFeaturesSet) {
+        let firefoxList = [];
+        let chromeList = [];
+        for (let browser of browserFeatureList) {
+            if (browser.features.has(feature)) {
+                if (browser.browser.includes('chrome'))
+                    chromeList.push(browser.browser);
+                else if (browser.browser.includes('firefox'))
+                    firefoxList.push(browser.browser)
+            }
+        }
+        finalReport.push({
+            'feature': feature,
+            'chromelist': chromeList,
+            'firefoxlist': firefoxList,
+        })
+    }
+
+    printFeatureResults(finalReport);
+}
+
+async function generateBrowserResults(browserType = 'chrome') {
+    if (browserType == 'chrome')
+        repDir = reportsDir + chromeDir;
+    else if (browserType == 'firefox')
+        repDir = reportsDir + firefoxDir;
+
+    let browserReportFileList = fs.readdirSync(repDir);
     let finalReport = [];
     for (let browserFile of browserReportFileList) {
         let featuresObject = await parseFile(repDir + '/' + browserFile);
@@ -167,6 +237,12 @@ async function main() {
     await printResults(finalReport);
 }
 
+
+async function main() {
+    // await generateBrowserResults('chrome');
+    await generateBrowserResults('firefox');
+    // await generateFeatureResults();
+}
 
 
 main();
