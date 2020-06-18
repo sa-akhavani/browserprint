@@ -4,17 +4,22 @@
         var seenKey = ('Symbol' in window) ? Symbol("we've seen this object") : ("__FAUX_SYMBOL__::" + Math.random());
 
         function hasSeen(object) {
-            return object.hasOwnProperty(seenKey)
+            return object.hasOwnProperty(seenKey);
         }
 
         function seeObject(object) {
             var id = ++seenSeed;
-            Object.defineProperty(object, seenKey, {
-                configurable: false,
-                enumerable: false,
-                writable: false,
-                value: id,
-            })
+            try {
+                // Try doing it the right way...
+                Object.defineProperty(object, seenKey, {
+                    configurable: false,
+                    enumerable: false,
+                    writable: false,
+                    value: id,
+                });
+            } catch (e1) {
+                //if ('log' in console) { console.error(e1); }
+            }
             return id;
         }
 
