@@ -85,7 +85,7 @@ class BrowserprintFullReport(BrowserprintReport):
 @router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     brid = uuid.uuid4()
-    compat = request.query_params.get("compat", False)
+    compat = bool(request.query_params.get("compat", False))
     result = await mongo_db["reports"].insert_one(
         {
             "state": "initiated",
@@ -121,7 +121,6 @@ async def post_report(report: BrowserprintReport):
                 "state": "completed",
                 "browser": report.browser,
                 "features": report.features,
-                "compat": True,
             }
         },
     )

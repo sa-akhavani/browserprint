@@ -76,9 +76,9 @@
             }
         }
 
-	// We walk the global object of an injected iframe, to avoid any polyfill-polution from _our_ namespace
-	var iframe = document.createElement('iframe');
-	document.body.appendChild(iframe);
+        // We walk the global object of an injected iframe, to avoid any polyfill-polution from _our_ namespace
+        var iframe = document.createElement('iframe');
+        document.body.appendChild(iframe);
         var tree = { 'globalObject': walkObject(iframe.contentWindow, 'window') };
 
         var output = document.getElementById('results');
