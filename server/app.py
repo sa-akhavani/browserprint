@@ -79,24 +79,34 @@ class BrowserprintReport(BaseModel):
 class BrowserprintFullReport(BrowserprintReport):
     when: datetime.datetime
     headers: List[Tuple[str, str]]
+    compat: Optional[bool]
 
 
 @router.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     brid = uuid.uuid4()
+    compat = bool(request.query_params.get("compat", False))
     result = await mongo_db["reports"].insert_one(
         {
             "state": "initiated",
             "brid": brid,
             "headers": request.headers.items(),
             "when": datetime.datetime.now(),
+            "compat": compat,
         }
     )
     logging.info(
-        f"inserted new (empty) report record (brid={brid}) -> Mongo _id={result.inserted_id}"
+        f"inserted new (empty) report record (brid={brid}, compat={compat}) -> Mongo _id={result.inserted_id}"
     )
 
-    return templates.TemplateResponse("index.html", {"request": request, "brid": brid})
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "brid": brid,
+            "spider_script": "allthethings.js" if not compat else "oldthethings.js",
+        },
+    )
 
 
 @router.post("/report", response_model=StatusMessage)
