@@ -156,8 +156,16 @@ async function printResults(finalReport) {
 
 async function printFeatureResults(finalReport) {
     // feature,numOfAppearance,chromeList,chromeFirst,chromeLast,firefoxList,firefoxFirst,firefoxLast
+    // for (report of finalReport) {
+    //     console.log(`${report.feature},${report.chromelist.length + report.firefoxlist.length},[${report.chromelist}],${report.chromelist[0]},${report.chromelist[report.chromelist.length-1]},[${report.firefoxlist}],${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
+    // }
+    // feature,numOfAppearance,chromeFirst,chromeLast,firefoxFirst,firefoxLast
+    // for (report of finalReport) {
+    //     console.log(`${report.feature},${report.chromelist.length + report.firefoxlist.length},${report.chromelist[0]},${report.chromelist[report.chromelist.length-1]},${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
+    // }
+
     for (report of finalReport) {
-        console.log(`${report.feature},${report.chromelist.length + report.firefoxlist.length},[${report.chromelist}],${report.chromelist[0]},${report.chromelist[report.chromelist.length-1]},[${report.firefoxlist}],${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
+        console.log(`${report.feature},${report.firefoxlist.length},${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
     }
 }
 
@@ -240,8 +248,8 @@ async function generateBrowserResults(browserType = 'chrome') {
 
 async function main() {
     // await generateBrowserResults('chrome');
-    await generateBrowserResults('firefox');
-    // await generateFeatureResults();
+    // await generateBrowserResults('firefox');
+    await generateFeatureResults();
 }
 
 
