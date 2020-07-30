@@ -1,0 +1,76 @@
+\section{Prototype Implementation}
+\label{sec:implementation}
+
+%implementation details
+	%% nginx
+	%% dokcerized helper server
+	%%% tiny web server on the helper server
+	%%% firewall rules
+
+In our implementation, we extend the functionality of a popular reverse proxy application to be able to read and write HTTP requests sent by clients. Also, we deploy a server that has the ability to fetch a resource from the Internet at a given URL and is configured to have no access to internal services.
+
+\subsection{Extending Reverse Proxy}
+We choose NGINX~\cite{nginx_website} and extend it to support the operations of searching and modifying requests. We also enable developers to except pages and parameters from those operations. 
+
+\subsubsection{Extending NGINX with Lua}
+NGINX is a high-performance web server and reverse proxy. We add the "ngx\_http\_lua\_module" module~\cite{openresty} to NGINX. This module allows writing Lua code to extend the functionality of NGINX. Using this, we write an extension to process incoming requests. We make our extension code publicly available~\cite{code-place} to help other researchers benefit from this work.
+%It is an open-source reverse proxy and web server~\cite{nginx}. It is popular because of its performance and versatility. NGINX uses an asynchronous, event-driven connection handling algorithm which enables it to scale to large number of concurrent connections with limited resources~\cite{nginx_performance}. It can act both as an independent web application server and as a reverse proxy with many application servers behind. 
+
+%\subsubsection{Lua Module}
+%To extend the functionality of the reverse proxy, we use an NGINX module called \texttt{ngx\_http\_lua\_module} to embed Lua scripts into the NGINX event-processing model~\cite{openresty}. Lua is an efficient and lightweight scripting language~\cite{lua}. To be able to both read and write HTTP requests, we use a specific directive called \texttt{rewrite\_by\_lua\_block} to encapsulate the extension code. We share our extension code on a Gitlab page.
+
+%\subsubsection{Decoding Requests}
+%In the context of a HTTP request, URL encoding (also known as percent encoding) is used in two different ways: 1) when a request URI data contains a reserved character (e.g. "/"), it should be percent-encoded~\cite{uri-rfc}, and 2) when a form data is submitted, the default encoding type is "application/x-www-form-urlencoded" and it uses percent encoding to encode reserved characters~\cite{forms-w3c}. Therefore, servers usually decode a URI or form data (with the default encoding type) they receive, to avoid confusion in case they contain reserved characters. 
+
+%Attackers can take advantage of this to bypass our search pattern. For example, they can use "http\%3a\%2f\%2f" instead of "http://", as they are treated the same by a server when the decoding happens. To avoid this bypass, the extension decodes the request URI and also request body if the request header of "Content-Type" has the value of "application/x-www-form-urlencoded". 
+
+\subsubsection{Searching and Modifying}
+%After an incoming request is decoded, the extension code searches for a URL pattern in the request body and URI. The pattern consists of a sequence of characters beginning with one or more letters and followed by a single colon and a double slash. A regular expression which describes the pattern is "[a-zA-Z]+://". %(see line 9 in block~\ref{lst:lua}). 
+The extension code searches for a URL pattern in the request body and URI. The pattern consists of a sequence of characters beginning with a single colon and followed by a double slash (i.e. "://"). Different versions of this pattern are also searched, which we detail later in Section~\ref{sec:evaluation} when we discuss defense evasion techniques.
+If the pattern is matched, it is assumed that the matching text is a separator between a URL scheme and a hostname, and thus, a URL is found. We refer to these characters as "scheme separator" in the rest of this paper. %A regular expression which describes the pattern is ``\texttt{[a-zA-Z]+://}''. 
+
+%Once a URL is found, the extension code modifies it by prepending the address of the helper server. To be more specific, there is a tiny web application running on the helper server and this application takes a URL as an argument to fetch the resource hosted at that URL; in fact, the found URL is added as an argument to this web application (see the message body of the request in step 2 of Figure~\ref{fig:diagram}). %(e.g. \texttt{http://foo.com/bar} is modified to become \texttt{http://helperserver/fetch?url=http://foo.com/bar}). 
+
+Once a URL is found, the extension code modifies it by prepending the address of the helper service. This prepending essentially passes the URL value as an argument to the helper service so that it can fetch the corresponding resource from the Internet (see the body of the request in Step 2 of Figure~\ref{fig:diagram}). %To be more specific, there is a tiny web application running on the helper server and this application takes a URL as an argument to fetch the resource hosted at that URL; in fact, the found URL is added as an argument to this web application (see the message body of the request in step 2 of Figure~\ref{fig:diagram}).
+
+%\begin{listing}[h]
+%\begin{luacode}
+%-- Read the request body
+%ngx.req.read_body()
+%
+%-- Get the request body
+%local req_body = ngx.req.get_body_data()
+%
+%if req_body then
+%	-- Decode the request body
+%	if (ngx.var.content_type == "application/x-www-form-urlencoded") then
+%		req_body = ngx.unescape_uri(req_body)
+%	end
+%	
+%	-- Modify the request body
+%	local new_req_body, n, err = ngx.re.gsub(req_body, "([a-zA-Z]+://)", "http://helperser/fetch?url=$1")
+%	ngx.req.set_body_data(new_req_body)
+%end
+%\end{luacode}
+%\caption{This code excerpt shows how URL search and modification is done.}
+%\label{lst:lua}
+%\end{listing}
+
+
+\subsubsection{Exclusions}
+Our prototype supports modification exclusions both at the page and parameter levels. A page-based exclusion excepts all requests sent to that page from modification. Similarly, a parameter-based exclusion makes the value of that parameter exempt. 
+
+We specify the list of pages and parameters to be excluded, in a space-separated format, in an NGINX configuration file. This list is used as a reference from within the extension code to enforce necessary exceptions. 
+
+\subsection{Deploying Helper Server}
+We use container technology to deploy a helper server in the internal network. Also, a service (i.e., the helper service) is started on the server to fetch resources from the Internet. We use firewall rules to isolate the helper server.
+
+
+\subsubsection{Server Image}
+We build a container image for the helper server from a Dockerfile. This file uses the official Ubuntu image as the base image. It also includes instructions for installing packages needed to start the helper service and add firewall rules. We also release this Dockerfile in the same repository~\cite{code-place}.
+
+\subsubsection{Helper Service}
+The helper service is implemented with a few lines of PHP code and it runs on an NGINX server. This code takes a URL as an argument and makes an HTTP request to that URL and returns the response. To keep track of content types, "Content-Type" header is used while fetching from the URL.
+
+\subsubsection{Firewall Rules}
+We rely on the UFW tool~\cite{ufw_website} to write and enable firewall rules on the helper server. Using UFW, access to private network ranges (\texttt{10.0.0.0/8}, \texttt{172.16.0.0/12}, \texttt{192.168.0.0/16}), including link-local addresses (\texttt{169.254.0.0/16}) is blocked. Additionally, the loopback interface is disabled to prevent access to localhost (i.e. \texttt{127.0.0.1}). Access to the web application server IP is explicitly allowed, while all TCP and UDP ports opened by services are configured to be unreachable.  

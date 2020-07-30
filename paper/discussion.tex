@@ -1,0 +1,23 @@
+\section{Discussion}
+\label{sec:discussion}
+
+%Little attention, but it's big
+%no systematic approach to defend, developers' solution suffer from flaws and come with important limitations
+%we fill this gap
+%we cannot solve oob, but we do well in in-band
+%we can be evaded, but 
+%while defending, our performance effects are minimal
+%it can be deployed in multiple ways
+%finally, we believe that this approach can go beyond
+
+SSRF vulnerability has received little attention from academic research community. However, especially recent events have increased the urgency of building effective defense solutions. Current best practices of defense are mostly a set of code-level checks written by developers. Developers, with a limited awareness in general, are hardly successful at developing complete defense. Even when the defense is complete, it comes with important limitations. 
+
+We fill this gap by proposing a systematic defense approach against SSRF attacks. Even though this approach does not look promising for out-of-band type of attacks, it is designed to address in-band SSRF attacks, which are far more common. These attacks are effectively prevented in an automated fashion, but only in rare cases a minimal cooperation is needed. 
+
+Depending on how this approach is implemented, evasion methods differ. Implementing this defense approach on an intermediate system, will come with higher chances of being evaded than code-level implementation. On the other hand, code-level implementation does not offer the same speed benefits of intermediate implementation. Therefore, risks and benefits of each implementation type should be assessed carefully. 
+
+While attacks are negated successfully, the performance overhead is minimal. Because, the defense becomes active only when an incoming request contains a URL, which is usually rare. Therefore, the functionality and speed of web applications remain almost unaffected. 
+
+To evaluate the effectiveness of this approach, we implement it on a reverse proxy. But, it is not the only way of implementing this approach. In fact, this approach can also be adopted at the code level. 
+
+This approach uses a security model where an entity delegates a specific task to another entity, to reduce the attack surface dramatically. This security model proves to be effective against SSRF attacks. But, we believe that this security model can go beyond SSRF vulnerability and inspire defense solutions against other types of vulnerabilities.   
