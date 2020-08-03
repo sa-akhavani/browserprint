@@ -134,6 +134,7 @@ async function generateComparisonResults(finalReport) {
         finalReport[i].differentFeatures = differentFeaturesSet;
         finalReport[i].differentFeaturesSize = differentFeaturesSet.size;
     }
+    return finalReport;
 }
 
 async function printResults(finalReport) {
@@ -241,15 +242,16 @@ async function generateBrowserResults(browserType = 'chrome') {
         };
         finalReport.push(browserFeatureData);
     }
-    await generateComparisonResults(finalReport);
+    finalReport = await generateComparisonResults(finalReport);
+    // console.log(finalReport)
     await printResults(finalReport);
 }
 
 
 async function main() {
-    // await generateBrowserResults('chrome');
+    await generateBrowserResults('chrome');
     // await generateBrowserResults('firefox');
-    await generateFeatureResults();
+    // await generateFeatureResults();
 }
 
 
