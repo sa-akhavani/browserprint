@@ -1,21 +1,25 @@
 \section{Introduction}
 \label{sec:introduction}
 
+A browser fingerprint is a set of information related to a user’s device from the hardware to
+the operating system to the browser and its configuration. Browser fingerprinting refers to the
+process of collecting information through a web browser to build a fingerprint of a device.
 
-
-In this paper, by performing an automated analysis on the data that we have collected, we attempt to answer
+In this paper, by performing multiple analysis on the data that we have collected, we attempt to answer
 the following questions:
 
 \begin{enumerate}
-  \item What "lifespan profiles" can we cluster browser features into? Are there any "permanently removed" features, and if so, how old/established were they? How long is the feature lifespan of removed features?
-  \item With respect to bloating, if we map the number of features per browser, how does the trend look? Are feature numbers increasing linearly, exponentially, etc.?
-  \item Who is leading and who is following in introducing features? Are we seeing some major differences in terms of feature introduction and removal between Firefox and Chrome?
-  \item Is there a relation between number of features in a browser and number of vulnerabilities that exist on that browser?
-  \item Are browsers becoming more fingerprintable?
+  \item Can we say that all brwosers are fingerprintable?
+  Yes. The feature set for each browser version in Chrome and Firefox is unique so we can fingerprint each browser version by extracting its features.
+%   \item What "lifespan profiles" can we cluster browser features into? Are there any "permanently removed" features, and if so, how old/established were they? How long is the feature lifespan of removed features?
+  \item With respect to bloating, if we map the number of features per browser, how does the trend look? Are feature numbers increasing linearly, exponentially, etc.? Number of features per browser is increasing. It's more intense in Chrome but both of the browsers have had significant increase in number of features per browser.
+  \item Who is leading and who is following in introducing features? Are we seeing some major differences in terms of feature introduction and removal between Firefox and Chrome? The feature introduction and removal is not similar between Chrome and Firefox. Firefox tend to keep its feature numbers steady. They remove much more features compared to Chrome. But chrome tends to add more features and keep them in the browser. So none of them are following each other and they have different feature trends.
+  \item Is there a relation between number of features in a browser and number of vulnerabilities that exist on that browser? Based on our data and analysis, we cannot say that. We saw that number of vulnerabilities found in newer browsers are less than older versions. Even when they have much more features, the vulnerability trend does not match the feature trend. 
+  \item Are browsers becoming more fingerprintable? We cannot say that. We saw that the difference feature set for each browser is getting smaller, 
 \end{enumerate}
 
 The rest of the paper is organized as follows: The next section describes our
-methodology and data gathering technique. Section 3 presents an analysis of the feature reports and their relation to browser vulnerability. In
+methodology and data gathering technique. Section 3 presents different analysis based on the feature reports and their relation to browser vulnerability. In
 Section 4, we present the related work and then briefly conclude the paper in
 Section 5.
 
