@@ -3,7 +3,7 @@
 
 \subsection{Feature Analysis}
 
-The first thing we want to answer in this paper is about browser features, feature trends, and feature lifespan. We extracted number of features in each browser version from our dataset. Then by comparing the feature set between different versions we find out how many features are added and removed from each version. We see that Chrome is Adding and removing much more features compared to firefox. But firefox removes bigger portion of its features in each version.
+The first thing we want to answer in this paper is about browser features, feature trends, and feature lifespan. We extracted the number of features in each browser version from our dataset. Then by comparing the feature set between different versions we find out how many features are added and removed from each version. We see that Chrome is Adding and removing many more features compared to firefox. But firefox removes a bigger portion of its features in each version.
 
 \ali{Add data about feature lifespans}
 
@@ -22,12 +22,12 @@ The first thing we want to answer in this paper is about browser features, featu
     \label{fig:times_bar}
 \end{figure}
 
-By using the extracted data for the previous part, we tried to compare feature trends in Chrome and Firefox. We see that Chrome is adding much more features to its browsers comparing to Firefox. Firefox tries to keep its features number more steady. They try to remove bigger portion of their feature set in each version. We cannot say one of them is following the other one in terms of feature introduction and removal.
+By using the extracted data for the previous part, we tried to compare feature trends in Chrome and Firefox. We see that Chrome is adding many more features to its browsers comparing to Firefox. Firefox tries to keep the number of its features more steady. They try to remove a bigger portion of their feature set in each version. We cannot say one of them is following the other one in terms of feature introduction and removal.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{figures/Feature-Trends.PNG}
-    \caption{Feature trends in firefox and chrome. Blue line represents number of features in chrome. Yellow line represents firefox.\ali{Need to rescale the chart so the text could be visible}}
+    \caption{Feature trends in Firefox and chrome. The blue line represents the number of features in chrome. The yellow line represents Firefox.\ali{Need to re-scale the chart so the text could be visible}}
     \label{fig:times_bar}
 \end{figure}
 
@@ -39,8 +39,8 @@ We wanted to answer two different things about browser fingerprinting in our pap
 To answer the first question, we created a feature set for each browser version that we had. A feature set is a set of browser features that exist in a specific browser version. After creating the feature set for each browser version in our study, we compared these sets to each other and realized that all of these sets are unique. This means that there are no two browsers that have the same feature set. This means that all of these browsers are fingerprintable. The reason for this finding is that browser vendors keep removing and adding features to their newer versions so that the feature set for each version becomes different than the others. So the answer to our question is yes. All of the browser versions in our study were fingerprintable.
 
 
-In order to answer the second question, we tried to compare the feature sets to each other. We see that vendors specially Google Chrome are adding lots of features to their newer versions but they do not remove features as much as they add. We see that the feature set for each browser is converging and we are tending to homogeneity of browser features. The unique feature set is getting smaller in almost every new browser version. The unique feature set is the set of features which make a specific browser version unique; either by being in the feature set or by not being in the feature set. \ali{maybe explain this more}
-So based on our findings, we cannot say that browsers are becoming more fingerprintable. Actually, they are becoming less fingerprintable.
+In order to answer the second question, we tried to compare the feature sets to each other. We see that vendors especially Google Chrome are adding lots of features to their newer versions but they do not remove features as much as they add. We see that the feature set for each browser is converging and we are tending to the homogeneity of browser features. The unique feature set is getting smaller in almost every new browser version. The unique feature set is the set of features that make a specific browser version unique; either by being in the feature set or by not being in the feature set. \ali{maybe explain this more}
+So based on our findings, we cannot say that browsers are becoming more fingerprintable.They are becoming less fingerprintable.
 
 \ali{Mention the size of the smallest and biggest feature set}
 
@@ -48,6 +48,10 @@ So based on our findings, we cannot say that browsers are becoming more fingerpr
 
 
 \subsection{Vulnerability Analysis}
-We have not been able to find a relation between number of vulnerabilities in a browser and number of features inside it. As we saw earlier, the number of features is increasing in newer browser version. But we saw that number of vulnerabilities is decreasing because newer browsers are becoming more secure by fixing security issues that existed in older browser version. Also, there may be undetected vulnerabilities in newer browsers which makes the vulnerability set smaller. So we cannot confidently say that there is a relation between number of features and number of vulnerabilities in browsers.
+We have not been able to find a relation between the number of vulnerabilities in a browser and the number of features inside it. As we saw earlier, the number of features is increasing in the newer browser version. But we saw that number of vulnerabilities is decreasing because newer browsers are becoming more secure by fixing security issues that existed in the older browser versions. Also, there may be undetected vulnerabilities in newer browsers which makes the vulnerability set smaller. So we cannot confidently say that there is a relationship between the number of features and the number of vulnerabilities in browsers.
 
 \ali{Still need to generate results and reports for this section.}
+
+
+\subsection{Vulnerability Analysis}
+\ali{Engin suggested to create a section with this topic and talk about what issues we faced during our study}

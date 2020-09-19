@@ -1,21 +1,15 @@
 \section{Methodology}
 \label{sec:methodology}
-Browser fingerprinting is possible by investigating different kinds of features that the target user's browser has. Also some of the attacks target a specific type of a browser feature. So In order to be able to answer questions about browser fingerprintability and browser vulnerabilities, we need to have access to a huge amount of browser feature and vulnerability data. In the next subsections, we explain the process
-we applied to collect browser feature and vulnerability data.
+Browser fingerprinting is possible by investigating different kinds of features that the target user's browser has. Also, some of the attacks target a specific type of browser feature. So To be able to answer questions about browser fingerprintability and browser vulnerabilities, we need to have access to a huge amount of browser feature and vulnerability data. In the next subsections, we explain the process we applied to collect browser features and vulnerability data.
 
 
 \subsection{Feature Gathering}
 
 \ali{Jordan can help in writing this part.}
 
-Via a simple script running inside a browser, a server can collect a wide variety of information from
-public interfaces called Application Programming Interface (API) and HTTP headers. An API
-is an interface that provides an entry point to specific objects and functions. While some APIs
-require a permission to be accessed like the microphone or the camera, most of them are freely
-accessible from any JavaScript script rendering the information collection trivial. Contrarily to
-other identification techniques like cookies that rely on a unique identifier (ID) directly stored
-inside the browser, browser fingerprinting is qualified as completely stateless. It does not leave any
-trace as it does not require the storage of information inside the browser.
+By using a simple script running inside a browser, a server can collect a wide variety of information from public interfaces called Application Programming Interface (API) and HTTP headers. An API
+is an interface that provides an entry point to specific objects and functions. While some APIs require permission to be accessed like the microphone or the camera, most of them are freely accessible from any JavaScript script rendering the information collection trivial. Contrarily to
+other identification techniques like cookies that rely on a unique identifier (ID) directly stored inside the browser, browser fingerprinting is qualified as completely stateless. It does not leave any trace as it does not require the storage of information inside the browser.
 
 \ali{What is a browser feature definition in our project? We should explain it more here and change some parts here}
 
@@ -26,35 +20,21 @@ trace as it does not require the storage of information inside the browser.
 
 \subsubsection{Browser Testing}
 
-We decided to target Google Chrome and Mozilla Firefox browsers in our paper. We are only testing major browser versions that are released during March 2016 upto April 2020. For chrome, this will be Chrome version 49 to Chrome 81. For Firefox, this will be Firefox 45 to Firefox 75.
-We ran the feature extractor script for each of these browser versions and extracted feature data for all of these browsers.
+We decided to target Google Chrome and Mozilla Firefox browsers in our paper. We are only testing major browser versions that are released during March 2016 up to April 2020. For chrome, this will be Chrome version 49 to Chrome 81. For Firefox, this will be Firefox 45 to Firefox 75. We ran the feature extractor script for each of these browser versions and extracted feature data for all of these browsers.
 
 \ali{Do we need to tell why we chose this period? The reason was that the script did not work for older browsers.}
 
-The platform that we used to run the tests on each browser was BrowserStack website. BrowserStack is a cloud web and mobile testing platform that enables developers to test their websites and mobile applications across on-demand browsers, operating systems and real mobile devices.
-We have also developed an automated browser testing platform which can be used for the browser versions that are not inclued in Browserstack's website. But in this paper, we keep it simple and only test major browser versions for Chrome and Firefox. All of these versions exist in Browserstack's platform.
+The platform that we used to run the tests on each browser was the BrowserStack website. BrowserStack is a cloud web and mobile testing platform that enables developers to test their websites and mobile applications across on-demand browsers, operating systems, and real mobile devices.
+We have also developed an automated browser testing platform that can be used for the browser versions that are not included in Browserstack's website. But in this paper, we keep it simple and only test major browser versions for Chrome and Firefox. All of these versions exist in Browserstack's platform.
 
 
 \subsection{Vulnerability Gathering}
 One major source of information for security vulnerabilities is the CVE (Common Vulnerabilities and Exposures) dataset,
 which is hosted by MITRE. CVE is a dictionary of publicly disclosed cybersecurity vulnerabilities and exposures. Each CVE entry
-has a unique CVE identifier, a general description, and a number of references to one or more external information sources of
+has a unique CVE identifier, a general description, and several references to one or more external information sources of
 the vulnerability.
 
 For our study, we used the CVE data from the National Vulnerability Database
 (NVD) which is provided by the National Institute of Standards and Technology (NIST).
-For each CVE entry in this dataset, we extracted the description, the affected product and version information, and the severity. After that we parsed this data and generated a cve entry list for each browser version in our dataset. This new dataset was the base of our vulnerability and feature analysis in our paper.
+For each CVE entry in this dataset, we extracted the description, the affected product and version information, and the severity. After that, we parsed this data and generated a CVE entry list for each browser version in our dataset. This new dataset was the base of our vulnerability and feature analysis in our paper.
 
-
-% The NIST publishes the NVD database as a set of XML files, in the form:
-% nvdcve-2.0-year.xml, where year is a number from 2002 until 2010. The first
-% file, nvdcve-2.0-2002.xml contains CVE entries from 1998 until 2002. In order
-% to build timelines during the analysis, we need to know the discovery date, disclosure date, or the publishing date of a CVE entry. Since CVE entries originate
-% from different external sources, the timing information provided in the CVE and
-% NVD data feeds proved to be insufficient. For this reason, we fetch this information by using the disclosure date from the corresponding entry in the Open
-% Source Vulnerability Database (OSVDB) [11].
-% For each candidate and accepted CVE entry, we extracted and stored the
-% identifier, the description, the disclosure date from OSVDB, the CWE vulnerability classification, the CVSS scoring, the affected vendor/product/version information, and the references to external sources. Then, we used the references
-% of each CVE entry to retrieve the vulnerability information originating from
-% the various external sources. We stored this website data along with the CVE
-% information for further analysis.

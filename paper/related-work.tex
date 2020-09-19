@@ -1,4 +1,14 @@
 \section{Related Work}
 \label{sec:related-work}
 
-This is the related work.
+There have been different kinds of studies on browser fingerprinting and browser bloating. The first large-scale study on browser fingerprinting was conducted by Eckersley~\cite{Eckersley}. Eckersley showed that different properties in a user's browser and the installed plugins can be combined to form a unique fingerprint. His study made us eager to see what is happening in the world of browser features and try to analyze the impact of different browser features on creating unique user fingerprints.
+
+In Synder et al.~\cite{Synder} they use a similar method to collect browser features by using the web API and extracting different kinds of JavaScript functions. They measure browser feature usage among Alexa's popular websites and also and how many security vulnerabilities have been associated with related browser features. However, they do not aim to measure fingerprintability of different browsers which is the main goal of our paper.
+ 
+Browser fingerprinting can be done by using different methods. Cao et al.~\cite{Cao} created user fingerprints by using OS-level features from screen resolution to the number of CPU cores. They also measure the uniqueness of different browser types by analyzing its OS-level features. Olejnik et al.~\cite{Olejnik} show that one way of fingerprinting is using web history. In this method, there is no need for a client-side state. This method is no longer possible because browser vendors have fixed this issue and extracting user history is possible like before.
+
+In light of the prior research on browser fingerprinting, we aim to analyze the trends and see whether we are getting better at managing browser fingerprinting or this issue is getting bigger as new features are being introduced in new browser versions.
+
+
+\ali{Should Cite these too: Unnecessarily Identifiable: Quantifying the fingerprintability of
+browser extensions due to bloat - Cookieless Monster: Exploring the Ecosystem of Web-based Device Fingerprinting - Everyone is Different: Client-side Diversification for Defending Against Extension Fingerprinting}
