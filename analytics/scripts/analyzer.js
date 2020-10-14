@@ -2,7 +2,7 @@ const fs = require('fs')
 const reportsDir = ('../reports')
 const firefoxDir = ('/firefox')
 const chromeDir = ('/chrome')
-
+const fingerprintingApis = require('../../dataset/fingerprint-api.js')
 stack = [];
 
 async function union(setA, setB) {
@@ -52,8 +52,10 @@ async function doreBatel(featuresObject) {
         if (typeof featuresObject[featureField] === 'object') {
             let feature = featuresObject[featureField];
             for (let field in feature) {
-                if (isNameKey(field))
+                if (isNameKey(field)) {
+                    stack.push(Object.keys(feature))
                     stack.push(field.replace('.name', ''));
+                }
                 else if (typeof feature[field] === 'object')
                     await doreBatel(feature[field])
             }
@@ -139,9 +141,10 @@ async function generateComparisonResults(finalReport) {
 
 async function printResults(finalReport) {
 
+    console.log('Browser, FeaturesSize, FingerprintingApiSize, AddedFeatureSize, RemovedFeatureSize')
     // Browser-Feature
     for (report of finalReport) {
-        console.log(`${report.browser}, ${report.features.size}, ${report.addedFeaturesSize}, ${report.removedFeaturesSize}`)
+        console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}, ${report.addedFeaturesSize}, ${report.removedFeaturesSize}`)
     }
 
     // console.log(finalReport)
@@ -225,6 +228,34 @@ async function generateFeatureResults() {
     printFeatureResults(finalReport);
 }
 
+
+async function isSimilar(api, feature) {
+    let f = feature.replace(' ', '.')
+    f = f.replace('.prototype', '')
+    let featureParts = f.split('.')
+    let apiParts = api.split('.')
+
+    for (let part of apiParts) {
+        if (featureParts.includes(part))
+            continue
+        else
+            return false;
+    }
+    return true
+}
+
+async function extractFingerprintableApis(featuresSet) {
+    let apis = new Set();
+
+    for (let api of fingerprintingApis) {
+        for (let f of featuresSet) {
+            if (await isSimilar(api, f))
+                apis.add(api);
+        }
+    }
+    return apis
+}
+
 async function generateBrowserResults(browserType = 'chrome') {
     if (browserType == 'chrome')
         repDir = reportsDir + chromeDir;
@@ -236,21 +267,22 @@ async function generateBrowserResults(browserType = 'chrome') {
     for (let browserFile of browserReportFileList) {
         let featuresObject = await parseFile(repDir + '/' + browserFile);
         let featuresSet = await extractFeatureNames(featuresObject);
+        let fingerprintApisSet = await extractFingerprintableApis(featuresSet);
         let browserFeatureData = {
             browser: browserFile,
             features: featuresSet,
+            fingerprintApis: fingerprintApisSet,
         };
         finalReport.push(browserFeatureData);
     }
     finalReport = await generateComparisonResults(finalReport);
-    // console.log(finalReport)
     await printResults(finalReport);
 }
 
 
 async function main() {
-    await generateBrowserResults('chrome');
-    // await generateBrowserResults('firefox');
+    // await generateBrowserResults('chrome');
+    await generateBrowserResults('firefox');
     // await generateFeatureResults();
 }
 
