@@ -5,18 +5,17 @@ Browser fingerprinting is possible by investigating different kinds of features 
 
 \subsection{Feature Gathering}
 
-\ali{Jordan can help in writing this part.}
+We collect feature sets from browsers (i.e., browserprints) when they load an instrumented web page.
+We use the term \textit{feature} to describe JavaScript objects, methods, and property values built into the global namespace of the browser's JavaScript implementation (i.e., the \texttt{window} object).
+This definition is obviously JavaScript-centric, but is unambiguous and naturally scalable, as we can automate collection of features from many different browsers using standard scripting and crawling techniques.
 
-By using a simple script running inside a browser, a server can collect a wide variety of information from public interfaces called Application Programming Interface (API) and HTTP headers. An API
-is an interface that provides an entry point to specific objects and functions. While some APIs require permission to be accessed like the microphone or the camera, most of them are freely accessible from any JavaScript script rendering the information collection trivial. Contrarily to
-other identification techniques like cookies that rely on a unique identifier (ID) directly stored inside the browser, browser fingerprinting is qualified as completely stateless. It does not leave any trace as it does not require the storage of information inside the browser.
+\subsubsection{Collection System}
 
-\ali{What is a browser feature definition in our project? We should explain it more here and change some parts here}
-
-\subsubsection{Feature Extractor Script}
-
-\ali{Jordan can help in writing this part.}
-
+The heart of our collection system is a custom web application that automatically captures and archives a visiting browser's full feature set on page load.
+These feature sets are constructed by using JavaScript to traverse the tree of non-cyclic JavaScript object references accessible from a pristine (i.e., unmodified) \texttt{window} object and collecting the full feature names encountered during the traversal.
+Each feature name comprises the sequence of property names leading from the global object to a given built-in JavaScript value.
+The traversal code is careful to not modify this object (which doubles as the global variable namespace) in any way, to avoid contaminating the resulting set of feature names.
+Captured feature sets are stored in a database, tagged with identifying metadata such as the browser's User-Agent string.
 
 \subsubsection{Browser Testing}
 
