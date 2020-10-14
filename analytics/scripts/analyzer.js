@@ -140,11 +140,10 @@ async function generateComparisonResults(finalReport) {
 }
 
 async function printResults(finalReport) {
-
-    console.log('Browser, FeaturesSize, FingerprintingApiSize, AddedFeatureSize, RemovedFeatureSize')
+    console.log('Browser, FeaturesSize, FingerprintingApiSize, AddedFeatureSize, RemovedFeatureSize, UniqueFeatureSize')
     // Browser-Feature
     for (report of finalReport) {
-        console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}, ${report.addedFeaturesSize}, ${report.removedFeaturesSize}`)
+        console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}, ${report.addedFeaturesSize}, ${report.removedFeaturesSize}, ${report.differentFeaturesSet.size}`)
     }
 
     // console.log(finalReport)
@@ -281,8 +280,8 @@ async function generateBrowserResults(browserType = 'chrome') {
 
 
 async function main() {
-    // await generateBrowserResults('chrome');
-    await generateBrowserResults('firefox');
+    await generateBrowserResults('chrome');
+    // await generateBrowserResults('firefox');
     // await generateFeatureResults();
 }
 
