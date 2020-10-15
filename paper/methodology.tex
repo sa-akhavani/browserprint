@@ -1,6 +1,6 @@
 \section{Methodology}
 \label{sec:methodology}
-Browser fingerprinting is possible by investigating different kinds of features that the target user's browser has. Also, some of the attacks target a specific type of browser feature. So To be able to answer questions about browser fingerprintability and browser vulnerabilities, we need to have access to a huge amount of browser feature and vulnerability data. In the next subsections, we explain the process we applied to collect browser features and vulnerability data.
+Browser fingerprinting is possible by investigating different kinds of features that the target user's browser has. So by investigation features existing in browsers we can find out about its fingerprintability status.  Also, some of the attacks target a specific type of browser feature. So To be able to answer questions about browser fingerprintability and browser vulnerabilities, we need to have access to a huge amount of browser features and vulnerability data. In the next subsections, we explain the process we used to collect browser features and vulnerability data.
 
 
 \subsection{Feature Gathering}
@@ -8,6 +8,10 @@ Browser fingerprinting is possible by investigating different kinds of features 
 We collect feature sets from browsers (i.e., browserprints) when they load an instrumented web page.
 We use the term \textit{feature} to describe JavaScript objects, methods, and property values built into the global namespace of the browser's JavaScript implementation (i.e., the \texttt{window} object).
 This definition is obviously JavaScript-centric, but is unambiguous and naturally scalable, as we can automate collection of features from many different browsers using standard scripting and crawling techniques.
+
+% By using a simple script running inside a browser, a server can collect a wide variety of information from public interfaces called Application Programming Interface (API) and HTTP headers. An API
+% is an interface that provides an entry point to specific objects and functions. While some APIs require permission to be accessed like the microphone or the camera, most of them are freely accessible from any JavaScript script rendering the information collection trivial. Contrarily to
+% other identification techniques like cookies that rely on a unique identifier (ID) directly stored inside the browser, browser fingerprinting is qualified as completely stateless. It does not leave any trace as it does not require the storage of information inside the browser.
 
 \subsubsection{Collection System}
 
@@ -19,13 +23,12 @@ Captured feature sets are stored in a database, tagged with identifying metadata
 
 \subsubsection{Browser Testing}
 
-We decided to target Google Chrome and Mozilla Firefox browsers in our paper. We are only testing major browser versions that are released during March 2016 up to April 2020. For chrome, this will be Chrome version 49 to Chrome 81. For Firefox, this will be Firefox 45 to Firefox 75. We ran the feature extractor script for each of these browser versions and extracted feature data for all of these browsers.
+We decided to target Google Chrome and Mozilla Firefox browsers in our analysis. We gathered every major browser version that was released During March 2016 to April 2020. This will map to Chrome version 49 to Chrome 81 and also Firefox 45 to Firefox 75.
 
-\ali{Do we need to tell why we chose this period? The reason was that the script did not work for older browsers.}
+In order to collect feature data for these browser versions, we had to connect each version to our web application. After connecting to our application, as mentioned in the previous subsection, we collect extract all of the features that the browser includes.
 
-The platform that we used to run the tests on each browser was the BrowserStack website. BrowserStack is a cloud web and mobile testing platform that enables developers to test their websites and mobile applications across on-demand browsers, operating systems, and real mobile devices.
-We have also developed an automated browser testing platform that can be used for the browser versions that are not included in Browserstack's website. But in this paper, we keep it simple and only test major browser versions for Chrome and Firefox. All of these versions exist in Browserstack's platform.
-
+We mainly used BrowserStack website as our testing platform to connect different browser versions to the extractor script. BrowserStack is a cloud web and mobile testing platform that enables developers to test their websites and mobile applications across on-demand browsers, operating systems, and real mobile devices. We also developed an automated browser testing platform that could be used for the browser versions that are not included in BrowserStack website or using specific configurations.
+All of the tests in this paper are run on a desktop computer using Windows 10 OS.
 
 \subsection{Vulnerability Gathering}
 One major source of information for security vulnerabilities is the CVE (Common Vulnerabilities and Exposures) dataset,
