@@ -4,6 +4,11 @@ const firefoxDir = ('/firefox')
 const chromeDir = ('/chrome')
 const fingerprintingApis = require('../../dataset/fingerprint-api.js')
 stack = [];
+CHROME_START_VERSION = 49
+CHROME_END_VERSION = 81
+FIREFOX_START_VERSION = 45
+FIREFOX_END_VERSION = 75
+
 
 async function union(setA, setB) {
     let _union = new Set(setA);
@@ -55,8 +60,7 @@ async function doreBatel(featuresObject) {
                 if (isNameKey(field)) {
                     stack.push(Object.keys(feature))
                     stack.push(field.replace('.name', ''));
-                }
-                else if (typeof feature[field] === 'object')
+                } else if (typeof feature[field] === 'object')
                     await doreBatel(feature[field])
             }
         } else {
@@ -158,18 +162,79 @@ async function printResults(finalReport) {
 }
 
 async function printFeatureResults(finalReport) {
-    // feature,numOfAppearance,chromeList,chromeFirst,chromeLast,firefoxList,firefoxFirst,firefoxLast
+    // console.log('feature, chromeCategory, firefoxCategory, isCommon')
     // for (report of finalReport) {
-    //     console.log(`${report.feature},${report.chromelist.length + report.firefoxlist.length},[${report.chromelist}],${report.chromelist[0]},${report.chromelist[report.chromelist.length-1]},[${report.firefoxlist}],${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
+    // console.log(`${report.feature}, ${report.chromeCategory}, ${report.firefoxCategory}, ${report.isCommon}`)
     // }
-    // feature,numOfAppearance,chromeFirst,chromeLast,firefoxFirst,firefoxLast
-    // for (report of finalReport) {
-    //     console.log(`${report.feature},${report.chromelist.length + report.firefoxlist.length},${report.chromelist[0]},${report.chromelist[report.chromelist.length-1]},${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
-    // }
-
-    for (report of finalReport) {
-        console.log(`${report.feature},${report.firefoxlist.length},${report.firefoxlist[0]},${report.firefoxlist[report.firefoxlist.length-1]}`)
+    console.log('browser, permanentlyAdded, permanentlyRemoved, experimental')
+    ffadded = 0
+    ffremoved = 0
+    ffexperimental = 0
+    chadded = 0
+    chremoved = 0
+    chexperimental = 0
+    isCommon = 0
+    for (const report of finalReport) {
+        if (report.firefoxCategory == 'permanently added')
+            ffadded++
+        if (report.firefoxCategory == 'permanently removed')
+            ffremoved++
+        if (report.firefoxCategory == 'experimental')
+            ffexperimental++
+        if (report.chromeCategory == 'permanently added')
+            chadded++
+        if (report.chromeCategory == 'permanently removed')
+            chremoved++
+        if (report.chromeCategory == 'experimental')
+            chexperimental++
+        if (report.isCommon)
+            isCommon++
     }
+    console.log(`firefox, ${ffadded}, ${ffremoved}, ${ffexperimental}`)
+    console.log(`chrome, ${chadded}, ${chremoved}, ${chexperimental}`)
+    console.log(`isCommon: ${isCommon}`)
+}
+
+
+async function determineFeatureCategory(browserList, browserType) {
+    list = []
+    for (let b of browserList) {
+        b = b.replace('.json', '')
+        b = b.replace('firefox-', '')
+        b = b.replace('chrome-', '')
+        b = parseInt(b)
+        list.push(b)
+    }
+    const sorted = list.sort((a, b) => {
+        return a - b
+    })
+
+    if (sorted.length < 1)
+        return null
+    if (sorted.length == 1)
+        return 'experimental'
+    if (browserType == 'chrome') {
+        if (sorted[sorted.length - 1] != CHROME_END_VERSION) {
+            if (sorted[sorted.length - 2])
+                if (sorted[sorted.length - 2] != CHROME_END_VERSION - 1)
+                    return 'permanently removed'
+        } else {
+            if (sorted.length == CHROME_END_VERSION - sorted[0] + 1)
+                return 'permanently added'
+        }
+        return 'experimental'
+    } else if (browserType == 'firefox') {
+        if (sorted[sorted.length - 1] != FIREFOX_END_VERSION) {
+            if (sorted[sorted.length - 2])
+                if (sorted[sorted.length - 2] != FIREFOX_END_VERSION - 1)
+                    return 'permanently removed'
+        } else {
+            if (sorted.length == FIREFOX_END_VERSION - sorted[0] + 1)
+                return 'permanently added'
+        }
+        return 'experimental'
+    }
+    return 'unknown browser type'
 }
 
 async function generateFeatureResults() {
@@ -217,10 +282,20 @@ async function generateFeatureResults() {
                     firefoxList.push(browser.browser)
             }
         }
+
+        chromeCategory = await determineFeatureCategory(chromeList, 'chrome');
+        firefoxCategory = await determineFeatureCategory(firefoxList, 'firefox');
+        let isCommon = false;
+        if (chromeCategory && firefoxCategory)
+            isCommon = true
+
         finalReport.push({
             'feature': feature,
             'chromelist': chromeList,
             'firefoxlist': firefoxList,
+            'chromeCategory': chromeCategory,
+            'firefoxCategory': firefoxCategory,
+            'isCommon': isCommon,
         })
     }
 
@@ -280,9 +355,9 @@ async function generateBrowserResults(browserType = 'chrome') {
 
 
 async function main() {
-    await generateBrowserResults('chrome');
+    // await generateBrowserResults('chrome');
     // await generateBrowserResults('firefox');
-    // await generateFeatureResults();
+    await generateFeatureResults();
 }
 
 
