@@ -1,1 +1,12 @@
 .vscode
+paper/main.pdf
+paper/*.out
+paper/*.aux
+paper/*.fdb_latexmk
+paper/*.log
+paper/*.log
+paper/*.fls
+paper/*.bbl
+paper/*.blg
+paper/*.synctex.gz
+paper/_minted-main
