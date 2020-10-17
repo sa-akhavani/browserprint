@@ -1,51 +1,78 @@
 \section{Methodology}
 \label{sec:methodology}
 
-Browser fingerprinting is possible by investigating different kinds of
-features that the target user's browser has. So by investigation
-features existing in browsers, we can find out about its
-fingerprintability status. Also, some of the attacks target a specific
-type of browser feature. So To be able to answer questions about
-browser fingerprintability and browser vulnerabilities, we need to
-have access to a huge amount of browser features and vulnerability
-data. In the next subsections, we explain the process we used to
-collect browser features and vulnerability data.
-
+To be able to determine how fingerprintable a browser is, we need to
+determine the features it supports when a web page is visited by the
+user. Similarly, we need to understand what features are supported by
+a specific version because attackers typically target such features in
+attacks (e.g., a bug in the video access functionality might be
+exploited). Hence, to answer the research questions we pose in this
+study, we need to be able to figure out exactly what features are
+supported by each browser version under analysis, and we also need
+access to vulnerability data for each browser. In this section, we
+describe the methodology we followed in this work, and explain how we
+created the datasets we used in our analyses.
 
 \subsection{Feature Gathering}
 
-We collect feature sets from browsers (i.e., browserprints) when they load an instrumented web page.
-We use the term \textit{feature} to describe JavaScript objects, methods, and property values built into the global namespace of the browser's JavaScript implementation (i.e., the \texttt{window} object).
-This definition is obviously JavaScript-centric, but is unambiguous and naturally scalable, as we can automate collection of features from many different browsers using standard scripting and crawling techniques.
+In order to collect ``feature'' sets from Firefox and Chrome, we
+redirect the browser under analysis to a JavaScript-instrumented web
+page. We use the term \textit{feature} to describe JavaScript objects,
+methods, and property values built into the global namespace of the
+browser's JavaScript implementation (i.e., the \texttt{window}
+object). Clearly, this definition is JavaScript-centric. However, it
+is unambiguous and naturally scalable. That is, we can automate the
+collection of features from many different browser implementations
+using standard scripting and crawling techniques. When the
+instrumented page is loaded by the browser, our JavaScript is executed
+that then probes and iterates through the features supported by the
+browser. This is done by using JavaScript to traverse the tree of
+non-cyclic JavaScript object references accessible from a pristine
+(i.e., unmodified) \texttt{window} object, and collecting the full
+feature names encountered during the traversal. Each feature name
+comprises the sequence of property names leading from the global
+object to a given built-in JavaScript value. The traversal code is
+careful to not modify this object (which doubles as the global
+variable namespace) in any way, to avoid contaminating the resulting
+set of feature names. Captured feature sets are then stored in a
+database, tagged with identifying metadata such as the browser's
+User-Agent string.
 
-% By using a simple script running inside a browser, a server can collect a wide variety of information from public interfaces called Application Programming Interface (API) and HTTP headers. An API
-% is an interface that provides an entry point to specific objects and functions. While some APIs require permission to be accessed like the microphone or the camera, most of them are freely accessible from any JavaScript script rendering the information collection trivial. Contrarily to
-% other identification techniques like cookies that rely on a unique identifier (ID) directly stored inside the browser, browser fingerprinting is qualified as completely stateless. It does not leave any trace as it does not require the storage of information inside the browser.
+\subsection{Browser Testing Platform}
 
-\subsubsection{Collection System}
+In this work, we decided to target the Google Chrome and Mozilla
+Firefox browsers as they are well-known, popular browsers that have
+millions of users. Also, these browsers possess distinct code bases
+(i.e., unlike Microsoft Edge that is based on Google Chrome). We
+gathered a copy of every major Firefox and Chrome version that was
+released during the March 2016 to April 2020 timeframe (i.e., Chrome
+versions 49 to 81, and Firefox versions 45 to 75).
 
-The heart of our collection system is a custom web application that automatically captures and archives a visiting browser's full feature set on page load.
-These feature sets are constructed by using JavaScript to traverse the tree of non-cyclic JavaScript object references accessible from a pristine (i.e., unmodified) \texttt{window} object and collecting the full feature names encountered during the traversal.
-Each feature name comprises the sequence of property names leading from the global object to a given built-in JavaScript value.
-The traversal code is careful to not modify this object (which doubles as the global variable namespace) in any way, to avoid contaminating the resulting set of feature names.
-Captured feature sets are stored in a database, tagged with identifying metadata such as the browser's User-Agent string.
+To individually connect each browser version to our instrumented
+feature gathering web application, we mainly used the BrowserStack web
+service. BrowserStack is a cloud-based web and mobile testing platform
+that enables developers to test their websites and mobile applications
+across on a wide range of browsers, operating systems, and real mobile
+devices. If a specific browser version or configuration was not
+available on BrowserStack, we developed and used automation scripts to
+instrument and run the browser instances on a desktop computer running
+Windows 10.
 
-\subsubsection{Browser Test Platform}
+\subsection{Vulnerability Information Gathering}
 
-We decided to target Google Chrome and Mozilla Firefox browsers in our analysis. We gathered every major browser version that was released During March 2016 to April 2020. This will map to Chrome version 49 to Chrome 81 and also Firefox 45 to Firefox 75.
+One major source of information for security vulnerabilities is the
+CVE (Common Vulnerabilities and Exposures) dataset that is hosted by
+MITRE. CVE is a dictionary of publicly disclosed cybersecurity
+vulnerabilities and exposures. Each CVE entry has a unique CVE
+identifier, a general description, and several references to one or
+more external information sources of the vulnerability.
 
-In order to collect feature data for these browser versions, we had to connect each version to our web application. After connecting to our application, as mentioned in the previous subsection, we collect extract all of the features that the browser includes.
-
-We mainly used BrowserStack website as our testing platform to connect different browser versions to the extractor script. BrowserStack is a cloud web and mobile testing platform that enables developers to test their websites and mobile applications across on-demand browsers, operating systems, and real mobile devices. We also developed an automated browser testing platform that could be used for the browser versions that are not included in BrowserStack website or using specific configurations.
-All of the tests in this paper are run on a desktop computer using Windows 10 OS.
-
-\subsection{Vulnerability Gathering}
-One major source of information for security vulnerabilities is the CVE (Common Vulnerabilities and Exposures) dataset,
-which is hosted by MITRE. CVE is a dictionary of publicly disclosed cybersecurity vulnerabilities and exposures. Each CVE entry
-has a unique CVE identifier, a general description, and several references to one or more external information sources of
-the vulnerability.
-
-For our study, we used the CVE data from the National Vulnerability Database
-(NVD) which is provided by the National Institute of Standards and Technology (NIST).
-For each CVE entry in this dataset, we extracted the description, the affected product and version information, and the severity. After that, we parsed this data and generated a CVE entry list for each browser version in our dataset. This new dataset was the base of our vulnerability and feature analysis in our paper.
+For our study, we used the CVE data from the National Vulnerability
+Database (NVD) that is provided by the National Institute of Standards
+and Technology (NIST). For each CVE entry in this dataset, we
+extracted the description, the affected product its specific version
+number, and the severity of the vulnerability. Then, we parsed this
+data and generated a CVE entry list for each browser version in our
+dataset. This new dataset was the basis of the vulnerability and
+feature analysis in this paper.
 
