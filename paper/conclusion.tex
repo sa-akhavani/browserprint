@@ -1,6 +1,35 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper, we analyzed different impacts of browser features in browser fingerprinting and security. We investigated more than 30 major browser versions for both Google Chrome and Mozilla Firefox. First, we extracted every browser feature that existed in these browser versions using the browser APIs. Then, we analyzed the feature set for these browsers and compared them together. We found out that the feature number is increasing in newer versions.
-Next, we compared feature reports for these browsers to the already listed fingerprinting APIs in browsers that are presented in different papers of the field. We saw that all of these browsers have some of these fingerprinting APIs in them so we say that all of the browsers are fingerprintable. Also, newer browsers are including more of these fingerprintg APIs thus they are more fingerprintable than the older versions. 
-Finally, we tried to find out whether this increase in the browser features is leading to more security flaws or not. We extracted CVEs related to these browser versions and compared the number of CVEs for each browser version to the number of features in it. Our data did not show that there is a valid relation between these two. So we can say that browsers are becoming more secure and newer browsers are having fewer vulnerabilities.
+Web browsers have become important services in our daily lives.
+Millions of users use web browsers for a wide range of purposes such
+as social media, online shopping, or surfing the web. Some of these
+services use browser fingerprinting to track and profile their users
+which can be in contrast with their web privacy. At the same time,
+browsers are also being targeted by attackers because they are
+attractive platforms to compromise. In this paper, we analyzed the
+impact of browser features on browser fingerprinting and security. We
+investigated more than 30 major browser versions for both Google
+Chrome and Mozilla Firefox between 2016 and 2020.
+
+First, we extracted every browser feature that existed in these
+browser versions using the browser APIs. Then, we analyzed the feature
+sets for these browsers, and compared them. One key observation was
+that the feature numbers are overall increasing in modern browsers,
+and they are indeed becoming more ``bloated'' in general.
+
+Next, we compared the feature reports for these browsers to the
+already listed fingerprinting APIs in browsers that are presented in
+literature. Our findings showed that each browser version between 2016
+and 2020 were uniquely fingerprintable, and that the fingerprintablity
+of the browsers have been increasing over the years.
+
+We also analyzed if the increase in the numbers of supported features
+and the fingerprintability lead to more reported security
+vulnerabilities. We extracted the CVEs for every browser version, and
+compared the number of CVEs to the number of features supported in the
+browser. Our data suggests that there is no direct relationship
+between the number of vulnerabilities in a browser, and the number of
+total features that it supports. Unlike the common belief, the
+``bloating'' of browsers does not seem to be leading to more
+insecurity.
