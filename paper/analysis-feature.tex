@@ -59,6 +59,26 @@ each browser vendor.
     \label{fig:times_bar}
 \end{figure}
 
+
+We also take a look at the common feature set between Firefox and Chrome. The total number of features that these browsers have had since the beginning is 15945 features. There exists only 4843 common features among them which is approximately \%30 of the total. So we figure out that the feature set between Firefox and Chrome highly varies and they are not much similar. Although both of these browsers may have the same functionality for specific purposes, they might have different APIs which means we categorize these two APIs as different features. One of these APIs may face a specific vulnerability while the other one is invulnerable to that specific CVE.
+
+After gathering all the feature information about every browser and generating a feature set for each browser version, by comparing the feature set between different versions we find out how many features are added and removed from each version. Our results show that Chrome is adding and removing many more features compared to Firefox. But Firefox removes a bigger portion of its features in each version and tries to keep its feature number more steady. Figure \ref{fig:ffaddremove} and Figure \ref{fig:chaddremove} show how this trend looks like among these browsers.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Firefox-add-remove.png}
+    \caption{Feature Introduction and removal in Firefox. Red bars represent the removed features and the blue bars represent added features.}
+    \label{fig:ffaddremove}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Chrome-add-remove.png}
+    \caption{Feature Introduction and removal in Chrome. Red bars represent the removed features and the blue bars represent added features.}
+    \label{fig:chaddremove}
+\end{figure}
+
+
 By using the feature datasets we extracted from the Firefox and Chrome
 versions, we compared feature trends for both browsers. The trends are
 depicted in Figure \ref{fig:times_bar}. The graph shows that the
