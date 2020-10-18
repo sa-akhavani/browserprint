@@ -57,10 +57,22 @@ each browser vendor.
     \includegraphics[width=\columnwidth]{figures/firefox-feature-categories.png}
     \caption{Feature category distribution for Firefox}
     \label{fig:times_bar}
-\end{figure}
+  \end{figure}
 
+  In this work, we also performed an analysis of the common features
+  between Firefox and Chrome. Since 2016, the total number of features
+  introduced by both Firefox and Chrome is 15,945. However, there
+  exists only 4,843 common features among them -- which is
+  approximately \%30 of the total number of features that these
+  vendors support. Hence, we can conclude that Firefox and Chrome do
+  not have a high overlap of the features that they support. Note that
+  although these browsers often offer very similar functionality,
+  unsurprisingly, their code bases are very different and the APIs
+  though which these features are available are also often
+  significantly different. As a result, vulnerabilities in these
+  browsers also tend to be very specific to the version and vendor.
 
-We also take a look at the common feature set between Firefox and Chrome. The total number of features that these browsers have had since the beginning is 15945 features. There exists only 4843 common features among them which is approximately \%30 of the total. So we figure out that the feature set between Firefox and Chrome highly varies and they are not much similar. Although both of these browsers may have the same functionality for specific purposes, they might have different APIs which means we categorize these two APIs as different features. One of these APIs may face a specific vulnerability while the other one is invulnerable to that specific CVE.
+  Although both of these browsers may have the same functionality for specific purposes, they might have different APIs which means we categorize these two APIs as different features. One of these APIs may face a specific vulnerability while the other one is invulnerable to that specific CVE.
 
 After gathering all the feature information about every browser and generating a feature set for each browser version, by comparing the feature set between different versions we find out how many features are added and removed from each version. Our results show that Chrome is adding and removing many more features compared to Firefox. But Firefox removes a bigger portion of its features in each version and tries to keep its feature number more steady. Figure \ref{fig:ffaddremove} and Figure \ref{fig:chaddremove} show how this trend looks like among these browsers.
 
@@ -77,7 +89,6 @@ After gathering all the feature information about every browser and generating a
     \caption{Feature Introduction and removal in Chrome. Red bars represent the removed features and the blue bars represent added features.}
     \label{fig:chaddremove}
 \end{figure}
-
 
 By using the feature datasets we extracted from the Firefox and Chrome
 versions, we compared feature trends for both browsers. The trends are
