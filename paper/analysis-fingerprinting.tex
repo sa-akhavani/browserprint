@@ -73,11 +73,11 @@ In our analyses, we automatically deduced a ``feature set'' for each
 browser version that we analyzed. A feature set is a set of (i.e., the
 list of) browser features that exist in that specific browser version
 under analysis. When we compared the features sets for each browser
-version to each other (e.g., Firefox 54 versus Firefox 55), we
-observed that each feature set was unique for all the browser versions
-that we tested. That is, there exist no two browsers that possess the
-same feature set. Hence, from this observation, we can deduce that all
-the browser versions that we analyzed are uniquely fingerprintable.
+version to each other (e.g., Firefox 54 versus 55), we observed that
+each feature set was unique for all the browser versions that we
+tested. That is, there exist no two browsers that possess the same
+feature set. Hence, from this observation, we can deduce that all the
+browser versions that we analyzed are uniquely fingerprintable.
 
 The reason why the feature sets are unique among different browser
 versions is that each browser, as we described before, have temporary
@@ -85,9 +85,14 @@ as well as non-persistent features. As a result, the fact that vendors
 continuously add, remove, and sometimes re-add features into their
 browsers also make them more fingerprintable at the same time.
 
-One other observation of our study is that vendors especially Google
-Chrome are adding lots of features to their newer versions but they do
-not remove features as much as they add. We define a set called unique
+One key difference between Google Chrome when compared to Mozilla
+Firefox is that Chrome is adding many more new features to the newer
+versions of the browser while at the same time keeping older features
+around. Firefox, in comparison, seems to be more aggressive with
+respect to removing older features from the browser, and hence,
+``debloating'' the software.
+
+We define a set called unique
 feature set as the set of features that make a specific browser
 version unique; either by existing in the feature set of that browser
 or by not being in the feature set. We generate the unique feature set
