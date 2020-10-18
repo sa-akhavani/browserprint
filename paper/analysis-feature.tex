@@ -1,50 +1,77 @@
-The first thing we want to answer in this paper is about browser features, feature trends, and feature lifespan. We extracted every feature existing in all of the browser versions in our test platform using the collection system discussed in Section~\ref{sec:methodology}. After extracting feature information for all of the browsers, we parsed the reports to generated useful information about them. We categorize browser features into three different categories.
+The first analysis we performed on the dataset we collected was to
+understand how browser features have evolved over time. Understanding
+and gaining insights into how Chrome and Firefox are dealing with new
+as well as older features is important to be able to distill
+conclusions about how secure and fingerprintable browsers are becoming
+as they evolve. Hence, our analysis looked at specific browser
+features that were introduced, what the typical lifespan of features
+looks like.
+
+After extracting feature information for all of the browsers under
+analysis, we automatically parsed the generated reports and analyzed
+them to see if the features in these browsers fall into specific
+categories. Our analysis showed that the features in Firefox and
+Chrome can be categorized in to three main categories:
 
 \begin{itemize}
-    \item Persistent Features: Features that are added to a specific version and exist in every other version that is released after the origin version. These features should appear in at least two versions to be considered into this category.
-    \item Non-Persistent Features: Features that existed in older versions but were removed since introducing a specific version and never appeared in newer versions again. These features should be absent in at least two versions to be considered non-persistent.
-    \item Temporary Features: These are features that are being added and removed every now and then. These features do not follow a straight trend and are being tested by vendors. Features that are not included in the above categories will be considered temporary.
+  
+\item Persistent Features: These are features that are added to a
+  specific version, and that continue to exist in every version that
+  is released after the feature was introduced. We consider a feature
+  to be ``persistent'' if it appears in at least two distinct browser
+  versions.
+      
+\item Non-Persistent Features: These are features that existed in
+  older versions of the browser, but were removed, and never appeared
+  in newer version of the browser again. We consider a feature to be
+  ``non-persistent'' if it is absent in at least two distinct versions
+  of the browser under analysis.
+      
+\item Temporary Features: These are features that are added and
+  removed from the browser from time to time. That is, they are
+  introduced, they are removed, and they might appear again at some
+  point. Such features are typically being tested by the vendors, and
+  it is not clear if they will become persistent, or non-persistent.
+
 \end{itemize}
 
-Before starting our main analysis, we take a look at these feature categories by comparing feature category sizes between Firefox and Chrome. We see that Chrome has 9482 persistent features, 711 non-persistent, and 3397 temporary features. On the other hand, Firefox has 6237 persistent, 809 non-persistent, and 152 temporary features. As we see, Firefox tends to be more stable by adding less temporary features. Also, they add significantly less features compared to Chrome but they are also removing more features for a long time. In figure A and B, we illustrate the portion of each feature category among the others.
+Our analysis shows that Chrome possesses 9482 persistent, 711
+non-persistent, and 3397 temporary features that it supports. In
+contrast, Firefox supports 6237 persistent, 809 non-persistent, and
+152 temporary features. Note that Firefox, overall, supports a less
+number of features than Chrome. Also, our analysis shows that Firefox,
+compared to Chrome, is keeping less features (i.e., they are removing
+more) over time. Figures \ref{fig:chrome-categories} and
+\ref{fig:firefox-categories} illustrate the feature categories for
+each browser vendor.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{figures/chrome-feature-categories.png}
-    \caption{Chrome feature categories. We see that persistent features have the major portion, then we have temporary features, and the non-persistent features have the least share among other categories.}
+    \caption{Feature category distribution for Chrome.}
     \label{fig:chrome-categories}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{figures/firefox-feature-categories.png}
-    \caption{Firefox feature categories. We see that persistent features have the major portion, then we have non-persistent features, and the temporary features have the least share among other categories.}
-    \label{fig:firefox-categories}
-\end{figure}
-
-We also take a look at the common feature set between Firefox and Chrome. The total number of features that these browsers have had since the beginning is 15945 features. There exists only 4843 common features among them which is approximately \%30 of the total. So we figure out that the feature set between Firefox and Chrome highly varies and they are not much similar. Although both of these browsers may have the same functionality for specific purposes, they might have different APIs which means we categorize these two APIs as different features. One of these APIs may face a specific vulnerability while the other one is invulnerable to that specific CVE.
-
-After gathering all the feature information about every browser and generating a feature set for each browser version, by comparing the feature set between different versions we find out how many features are added and removed from each version. Our results show that Chrome is adding and removing many more features compared to Firefox. But Firefox removes a bigger portion of its features in each version and tries to keep its feature number more steady. Figure 1 and Figure 2 show how this trend looks like among these browsers.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/Firefox-add-remove.png}
-    \caption{Feature Introduction and removal in Firefox. Red bars represent the removed features and the blue bars represent added features.}
+    \caption{Feature category distribution for Firefox}
     \label{fig:times_bar}
 \end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/Chrome-add-remove.png}
-    \caption{Feature Introduction and removal in Chrome. Red bars represent the removed features and the blue bars represent added features.}
-    \label{fig:times_bar}
-\end{figure}
-
-By using the extracted data for the previous part, we tried to compare feature trends in Chrome and Firefox. We see that Chrome is adding many more features to its browsers comparing to Firefox. Firefox tries to keep the number of its features more steady. They try to remove a bigger portion of their feature set in each version. We cannot say one of them is following the other one in terms of feature introduction and removal.
+By using the feature datasets we extracted from the Firefox and Chrome
+versions, we compared feature trends for both browsers. The trends are
+depicted in Figure \ref{fig:times_bar}. The graph shows that the
+  number of features supported by Firefox seem to be quite steady
+  (i.e., if new features are added, some older ones are typically
+  removed) while the number of features supported by Chrome is growing
+  over time. Hence, the data suggests that Chrome and Firefox are
+  following differing browser feature development philosophies.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{figures/Feature-Trends.PNG}
-    \caption{Feature trends in Firefox and chrome. The blue line represents the number of features in chrome. The yellow line represents Firefox.\ali{Need to re-scale the chart so the text could be visible}}
+    \caption{Feature trends in Firefox and Chrome when compared to
+      each other.}
     \label{fig:times_bar}
 \end{figure}
