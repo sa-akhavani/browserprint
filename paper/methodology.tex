@@ -50,7 +50,7 @@ versions 49 to 81, and Firefox versions 45 to 75).
 
 To individually connect each browser version to our instrumented
 feature gathering web application, we mainly used the BrowserStack web
-service. BrowserStack is a cloud-based web and mobile testing platform
+service~\cite{browserstack}. BrowserStack is a cloud-based web and mobile testing platform
 that enables developers to test their websites and mobile applications
 across on a wide range of browsers, operating systems, and real mobile
 devices. If a specific browser version or configuration was not
@@ -58,11 +58,17 @@ available on BrowserStack, we developed and used automation scripts to
 instrument and run the browser instances on a desktop computer running
 Windows 10.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Browser Fingerprinting APIs %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{fp-apis}
+
 \subsection{Vulnerability Information Gathering}
 
 One major source of information for security vulnerabilities is the
 CVE (Common Vulnerabilities and Exposures) dataset that is hosted by
-MITRE. CVE is a dictionary of publicly disclosed cybersecurity
+MITRE. A CVE entry contains several fields with standardized text/definitions that represent a publicly disclosed cybersecurity
 vulnerabilities and exposures. Each CVE entry has a unique CVE
 identifier, a general description, and several references to one or
 more external information sources of the vulnerability.
