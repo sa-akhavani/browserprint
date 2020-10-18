@@ -38,6 +38,12 @@ set of feature names. Captured feature sets are then stored in a
 database, tagged with identifying metadata such as the browser's
 User-Agent string.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Browser Fingerprinting APIs %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{fp-apis}
+
 \subsection{Browser Testing Platform}
 
 In this work, we decided to target the Google Chrome and Mozilla
@@ -58,17 +64,12 @@ available on BrowserStack, we developed and used automation scripts to
 instrument and run the browser instances on a desktop computer running
 Windows 10.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Browser Fingerprinting APIs %%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{fp-apis}
-
 \subsection{Vulnerability Information Gathering}
 
 One major source of information for security vulnerabilities is the
 CVE (Common Vulnerabilities and Exposures) dataset that is hosted by
-MITRE. A CVE entry contains several fields with standardized text/definitions that represent a publicly disclosed cybersecurity
+MITRE. A CVE entry contains several fields with standardized
+text/definitions that represent a publicly disclosed cybersecurity
 vulnerabilities and exposures. Each CVE entry has a unique CVE
 identifier, a general description, and several references to one or
 more external information sources of the vulnerability.
@@ -81,4 +82,3 @@ number, and the severity of the vulnerability. Then, we parsed this
 data and generated a CVE entry list for each browser version in our
 dataset. This new dataset was the basis of the vulnerability and
 feature analysis in this paper.
-
