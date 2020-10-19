@@ -11,7 +11,7 @@ After extracting feature information for all of the browsers under
 analysis, we automatically parsed the generated reports and analyzed
 them to see if the features in these browsers fall into specific
 categories. Our analysis suggested that the features in Firefox and
-Chrome can be categorized in to three main categories:
+Chrome can be categorized into three main categories:
 
 \begin{itemize}
   
@@ -23,7 +23,7 @@ Chrome can be categorized in to three main categories:
       
 \item Non-Persistent Features: These are features that existed in
   older versions of the browser, but were removed, and never appeared
-  in newer version of the browser again. We consider a feature to be
+  in newer versions of the browser again. We consider a feature to be
   ``non-persistent'' if it is absent in at least two distinct versions
   of the browser under analysis.
       
@@ -40,7 +40,7 @@ non-persistent, and 3,397 recurring features that it supports. In
 contrast, Firefox supports 6,237 persistent, 809 non-persistent, and
 152 recurring features. Note that Firefox, overall, supports a less
 number of features than Chrome. Also, our analysis suggests that Firefox,
-compared to Chrome, is keeping less features (i.e., they are removing
+compared to Chrome, is keeping fewer features (i.e., they are removing
 more) over time. Figures \ref{fig:chrome-categories} and
 \ref{fig:firefox-categories} illustrate the feature categories for
 each browser vendor.
@@ -62,12 +62,12 @@ each browser vendor.
   In this work, we also performed an analysis of the common features
   between Firefox and Chrome. Since 2016, the total number of features
   introduced by both Firefox and Chrome is 15,945. However, there
-  exists only 4,843 common featur`es among them -- which is
+  exist only 4,843 common features among them -- which is
   approximately \%30 of the total number of features that these
   vendors support. Hence, we can conclude that Firefox and Chrome do
   not have a high overlap of the features that they support. Note that
   although these browsers often offer very similar functionality,
-  unsurprisingly, their code bases are very different and the APIs
+  unsurprisingly, their codebases are very different and the APIs
   though which these features are available are also often
   significantly different. As a result, it is clear that
   vulnerabilities in these browsers will be very specific to the
@@ -100,7 +100,7 @@ each browser vendor.
 By using the feature datasets we extracted from the Firefox and Chrome
 versions, we compared feature trends for both browsers. The trends are
 depicted in Figure \ref{fig:featuretrends}. The graph shows that the
-  number of features supported by Firefox seem to be quite steady
+  number of features supported by Firefox seems to be quite steady
   (i.e., if new features are added, some older ones are typically
   removed) while the number of features supported by Chrome is growing
   over time. Hence, the data suggests that Chrome and Firefox are
