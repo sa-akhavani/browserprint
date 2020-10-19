@@ -14,6 +14,7 @@ describe the methodology we followed in this work, and explain how we
 created the datasets we used in our analyses.
 
 \subsection{Feature Gathering}
+\label{sec:feature-gathering}
 
 In order to collect ``feature'' sets from Firefox and Chrome, we
 redirect the browser under analysis to a JavaScript-instrumented web
@@ -37,6 +38,8 @@ variable namespace) in any way, to avoid contaminating the resulting
 set of feature names. Captured feature sets are then stored in a
 database, tagged with identifying metadata such as the browser's
 User-Agent string.
+
+We use the terms \textit{browser features}, as defined in this section, and \textit{JavaScript APIs} interchangeably in our work.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,7 +1,7 @@
 \subsection{Browser Fingerprinting APIs}
 \label{sec:fp-apis}
 
-We conduct an in-depth analysis in order to determine which browser features are associated with fingerprinting. We use this list of suspicious APIs in our measurements in Section~\ref{sec:analysis}. We describe in the following how we conducted the list of suspicious browser features that are related to browser fingerprinting.
+We conduct an in-depth analysis in order to determine which browser features are associated with fingerprinting. We use this list of suspicious APIs in our measurements in Section~\ref{sec:analysis} to quantify \textit{fingerprintability}: the ratio of browser features in a browser version that are associated with fingerprinting techniques. We describe in the following how we conducted the list of suspicious browser features that are related to browser fingerprinting.
 
 Our list of suspicious browser fingerprinting API contains in total 313 JavaScript APIs. These APIs are considered suspicious because the purpose of using these API depends on the programmer who writes the source code. In Panopticlick's research~\cite{panopticlick}, browser fingerprinting is achieved through a combination of APIs that seem innocent, such as \texttt{Navigator.plugins}, \texttt{Navigator.userAgent}, and \texttt{Screen.colorDepth}. These APIs are designed with their original objectives. However, they are chosen to fingerprint browsers due to their alternative functionality in collecting information to narrow down the scope of visited users. Based on our approach taken to collect APIs, there is no way to determine whether the source code is doing browser fingerprinting without the acknowledgment of the writer of the code. 
 
