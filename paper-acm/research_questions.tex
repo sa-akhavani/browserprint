@@ -1,0 +1,55 @@
+\section{Research Questions}
+\label{sec:introduction}
+
+In this paper, by performing an automated analysis, we attempt to
+answer the following research questions:
+
+\begin{enumerate}
+  
+\item {\em Are major versions of Firefox and Chrome browsers
+    fingerprintable?} Our results suggest that the feature set for each
+  Firefox and Chrome browser version is unique. There exist multiple
+  APIs in every browser version that we have analyzed that can be used
+  for fingerprinting. By extracting all the features supported by a
+  browser using API calls, we can indeed uniquely identify each
+  browser version.
+
+\item {\em Are Firefox and Chrome browsers becoming more
+    fingerprintable over time?} One of the major conclusions of our
+  study is that the number of APIs one can use in the newer versions
+  of Chrome and Firefox is larger than in older versions. Hence, newer
+  browser versions are even more fingerprintable than previous
+  versions, and our findings suggest that this trend is likely to
+  continue. As a result, privacy might be an even more significant
+  concern in the future for browser users.
+    
+\item {\em What ``lifespan profiles'' can we cluster browser features
+    into? Are there any``permanently removed'' features? If so, how
+    did their life cycle look like?} Our results suggest that we can
+  categorize browser features based on their lifespan into three main
+  categories (i.e., persistent features, non persistent features, and
+  recurring features). We observe that most of the features are added
+  permanently, and are not removed over time -- indicating that
+  browsers are indeed becoming more ``bloated'' as they evolve.
+
+\item {\em With respect to browser bloating, how does Firefox compare
+    to Chrome?} In our study, we were able to map the number of unique
+  features for major versions of Firefox and Chrome. The results
+  suggest that Chrome is introducing more features over time than
+  Firefox, but that both browser vendors have shown a significant
+  increase in the total number of features they support per version
+  since 2016. Compared to Firefox, Chrome tends to introduce more new
+  features and keep them around longer.
+ 
+\item {\em Is there a correlation between the number of features
+    available in a browser (i.e., how ``bloated'' the browser is) and
+    the number of vulnerabilities that exist on that browser?} Our
+  data suggest that, unlike the widely held belief, there is no
+  direct correlation between the number of features that a browser
+  version supports and the number of vulnerabilities in that
+  version. Although browsers are indeed becoming more ``bloated'' over
+  time, at the same time, their codebase seems to be becoming more
+  secure.
+    
+\end{enumerate}
+

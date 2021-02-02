@@ -1,0 +1,387 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{28}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{??}{ami}{2020}]%
+        {amiunique}
+ \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{{AmIUnique}}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://amiunique.org}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{[Online; accessed 16. Oct. 2020].}
+
+
+\bibitem[\protect\citeauthoryear{??}{Eas}{2020}]%
+        {Easylist}
+ \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{{EasyList}}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://easylist.to/}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{[Online; accessed 19. Oct. 2020].}
+
+
+\bibitem[\protect\citeauthoryear{??}{pan}{2020}]%
+        {panopticlick}
+ \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{{Panopticlick}}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://panopticlick.eff.org}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{[Online; accessed 16. Oct. 2020].}
+
+
+\bibitem[\protect\citeauthoryear{??}{web}{2020}]%
+        {webidl}
+ \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{{WebIDL} {Level} 1}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.w3.org/TR/WebIDL-1/}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{[Online; accessed 16. Oct. 2020].}
+
+
+\bibitem[\protect\citeauthoryear{Acar, Juarez, Nikiforakis, Diaz, G\"{u}rses,
+  Piessens, and Preneel}{Acar et~al\mbox{.}}{2013}]%
+        {fpdetective}
+\bibfield{author}{\bibinfo{person}{Gunes Acar}, \bibinfo{person}{Marc Juarez},
+  \bibinfo{person}{Nick Nikiforakis}, \bibinfo{person}{Claudia Diaz},
+  \bibinfo{person}{Seda G\"{u}rses}, \bibinfo{person}{Frank Piessens}, {and}
+  \bibinfo{person}{Bart Preneel}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{FPDetective: Dusting the Web for Fingerprinters}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the 2013 ACM SIGSAC Conference on
+  Computer \& Communications Security}} (Berlin, Germany)
+  \emph{(\bibinfo{series}{CCS '13})}. \bibinfo{publisher}{Association for
+  Computing Machinery}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{1129–1140}.
+\newblock
+\showISBNx{9781450324779}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/2508859.2516674}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Apple}{Apple}{2019}]%
+        {safari-privacy}
+\bibfield{author}{\bibinfo{person}{Apple}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \bibinfo{title}{Safari Privacy Overview}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.apple.com/safari/docs/Safari_White_Paper_Nov_2019.pdf}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Berners-Lee}{Berners-Lee}{1990}]%
+        {WorldWideWeb}
+\bibfield{author}{\bibinfo{person}{Tim Berners-Lee}.}
+  \bibinfo{year}{1990}\natexlab{}.
+\newblock \bibinfo{title}{The WorldWideWeb browser}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.w3.org/People/Berners-Lee/WorldWideWeb.html}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{BrowserStack}{BrowserStack}{2020}]%
+        {browserstack}
+\bibfield{author}{\bibinfo{person}{BrowserStack}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{{App \& Browser Testing Made Easy}}.
+\newblock \bibinfo{howpublished}{\url{https://www.browserstack.com/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Cao, Li, and Wijmans}{Cao
+  et~al\mbox{.}}{2017}]%
+        {Cao}
+\bibfield{author}{\bibinfo{person}{Yinzhi Cao}, \bibinfo{person}{Song Li},
+  {and} \bibinfo{person}{Erik Wijmans}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{(Cross-)Browser Fingerprinting via OS and Hardware
+  Level Features}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.14722/ndss.2017.23152}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Chenxiong, Koo, Oh, Kim, and Lee}{Chenxiong
+  et~al\mbox{.}}{2020}]%
+        {slimium-ccs2020}
+\bibfield{author}{\bibinfo{person}{Qian Chenxiong}, \bibinfo{person}{Hyungjoon
+  Koo}, \bibinfo{person}{Changseok Oh}, \bibinfo{person}{Taesoo Kim}, {and}
+  \bibinfo{person}{Wenke Lee}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Slimium: Debloating the Chromium Browser with
+  Feature Subsetting}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM
+  Conference on Computer and Communications Security (CCS)}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chrome}{Chrome}{2017}]%
+        {chrome-56-notes}
+\bibfield{author}{\bibinfo{person}{Google Chrome}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{New {In} {Chrome} 56 {\textbar} {Web}}.
+\newblock
+  \bibinfo{howpublished}{\url{https://developers.google.com/web/updates/2017/01/nic56}}.
+\newblock
+\newblock
+\shownote{[Online; accessed 16. Oct. 2020].}
+
+
+\bibitem[\protect\citeauthoryear{Cloudwards}{Cloudwards}{2020}]%
+        {ChromeSecure}
+\bibfield{author}{\bibinfo{person}{Cloudwards}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{{Most Secure Web Browser of 2020: Staying Safe
+  Online}}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.cloudwards.net/most-secure-web-browser/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Eckersley}{Eckersley}{2010}]%
+        {Eckersley}
+\bibfield{author}{\bibinfo{person}{Peter Eckersley}.}
+  \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{How Unique Is Your Web Browser?}. In
+  \bibinfo{booktitle}{\emph{Privacy Enhancing Technologies}},
+  \bibfield{editor}{\bibinfo{person}{Mikhail~J. Atallah} {and}
+  \bibinfo{person}{Nicholas~J. Hopper}} (Eds.). \bibinfo{publisher}{Springer
+  Berlin Heidelberg}, \bibinfo{address}{Berlin, Heidelberg},
+  \bibinfo{pages}{1--18}.
+\newblock
+\showISBNx{978-3-642-14527-8}
+
+
+\bibitem[\protect\citeauthoryear{Firefox}{Firefox}{2017}]%
+        {firefox-51-notes}
+\bibfield{author}{\bibinfo{person}{Mozilla Firefox}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Firefox 51.0, {See} {All} {New} {Features}, {Updates}
+  and {Fixes}}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.mozilla.org/en-US/firefox/51.0/releasenotes/}}.
+\newblock
+\newblock
+\shownote{[Online; accessed 16. Oct. 2020].}
+
+
+\bibitem[\protect\citeauthoryear{Firefox}{Firefox}{2020}]%
+        {firefox-fingerprinting}
+\bibfield{author}{\bibinfo{person}{Mozilla Firefox}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{How to block fingerprinting with Firefox}.
+\newblock
+  \bibinfo{howpublished}{\url{https://blog.mozilla.org/firefox/how-to-block-fingerprinting-with-firefox/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{G\'{o}mez-Boix, Laperdrix, and
+  Baudry}{G\'{o}mez-Boix et~al\mbox{.}}{2018}]%
+        {hidinginthecrowd}
+\bibfield{author}{\bibinfo{person}{Alejandro G\'{o}mez-Boix},
+  \bibinfo{person}{Pierre Laperdrix}, {and} \bibinfo{person}{Benoit Baudry}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Hiding in the Crowd: An Analysis of the
+  Effectiveness of Browser Fingerprinting at Large Scale}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 2018 World Wide Web Conference}}
+  (Lyon, France) \emph{(\bibinfo{series}{WWW '18})}.
+  \bibinfo{publisher}{International World Wide Web Conferences Steering
+  Committee}, \bibinfo{address}{Republic and Canton of Geneva, CHE},
+  \bibinfo{pages}{309–318}.
+\newblock
+\showISBNx{9781450356398}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3178876.3186097}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Jueckstock and Kapravelos}{Jueckstock and
+  Kapravelos}{2019}]%
+        {vv8-imc19}
+\bibfield{author}{\bibinfo{person}{Jordan Jueckstock} {and}
+  \bibinfo{person}{Alexandros Kapravelos}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{VisibleV8: In-browser Monitoring of JavaScript in
+  the Wild}}. \bibinfo{howpublished}{/projects/vv8/}. In
+  \bibinfo{booktitle}{\emph{{Proceedings of the ACM Internet Measurement
+  Conference (IMC)}}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Kassner}{Kassner}{2016}]%
+        {Bloating}
+\bibfield{author}{\bibinfo{person}{Michael Kassner}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{title}{{Bloatware as a security risk: Researchers'
+  innovative ways to combat the scourge}}.
+\newblock
+  \bibinfo{howpublished}{\url{https://www.techrepublic.com/article/bloatware-as-a-security-risk-researchers-innovative-ways-to-combat-the-scourge/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Mowery and Shacham}{Mowery and
+  Shacham}{2012}]%
+        {mowery2012pixel}
+\bibfield{author}{\bibinfo{person}{Keaton Mowery} {and} \bibinfo{person}{Hovav
+  Shacham}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Pixel perfect: Fingerprinting canvas in {HTML5}}.
+\newblock \bibinfo{journal}{\emph{Proceedings of W2SP}} (\bibinfo{year}{2012}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Mozilla}{Mozilla}{2020a}]%
+        {FirefoxFingerprinting}
+\bibfield{author}{\bibinfo{person}{Mozilla}.} \bibinfo{year}{2020}\natexlab{a}.
+\newblock \bibinfo{title}{{How to block fingerprinting with Firefox }}.
+\newblock
+  \bibinfo{howpublished}{\url{https://blog.mozilla.org/firefox/how-to-block-fingerprinting-with-firefox/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Mozilla}{Mozilla}{2020b}]%
+        {FirefoxCrashes}
+\bibfield{author}{\bibinfo{person}{Mozilla}.} \bibinfo{year}{2020}\natexlab{b}.
+\newblock \bibinfo{title}{{Progress in Our Quest to Defeat Browser Crashes}}.
+\newblock
+  \bibinfo{howpublished}{\url{https://blog.mozilla.org/firefox/defeat-browser-crashes/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Nikiforakis, Kapravelos, Joosen, Kruegel,
+  Piessens, and Vigna}{Nikiforakis et~al\mbox{.}}{2013}]%
+        {cookiemonster-SP13}
+\bibfield{author}{\bibinfo{person}{Nick Nikiforakis},
+  \bibinfo{person}{Alexandros Kapravelos}, \bibinfo{person}{Wouter Joosen},
+  \bibinfo{person}{Chris Kruegel}, \bibinfo{person}{Frank Piessens}, {and}
+  \bibinfo{person}{Giovanni Vigna}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{{Cookieless Monster: Exploring the Ecosystem of
+  Web-based Device Fingerprinting}}. In \bibinfo{booktitle}{\emph{Proceedings
+  of the IEEE Symposium on Security and Privacy}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Olejnik, Castelluccia, and Janc}{Olejnik
+  et~al\mbox{.}}{2012}]%
+        {Olejnik}
+\bibfield{author}{\bibinfo{person}{Łukasz Olejnik}, \bibinfo{person}{Claude
+  Castelluccia}, {and} \bibinfo{person}{Artur Janc}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Why Johnny Can't Browse in Peace: On the Uniqueness
+  of Web Browsing History Patterns}.
+\newblock  (\bibinfo{date}{07} \bibinfo{year}{2012}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Snyder, Ansari, Taylor, and Kanich}{Snyder
+  et~al\mbox{.}}{2016}]%
+        {snyder-imc16}
+\bibfield{author}{\bibinfo{person}{Peter Snyder}, \bibinfo{person}{Lara
+  Ansari}, \bibinfo{person}{Cynthia Taylor}, {and} \bibinfo{person}{Chris
+  Kanich}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Browser Feature Usage on the Modern Web}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the Internet Measurement Conference
+  (IMC)}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Snyder and Livshits}{Snyder and
+  Livshits}{2019}]%
+        {brave-fpbudget}
+\bibfield{author}{\bibinfo{person}{Peter Snyder} {and} \bibinfo{person}{Ben
+  Livshits}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \bibinfo{title}{Brave, Fingerprinting, and Privacy Budgets}.
+\newblock
+  \bibinfo{howpublished}{\url{https://brave.com/brave-fingerprinting-and-privacy-budgets/}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Snyder, Taylor, and Kanich}{Snyder
+  et~al\mbox{.}}{2017}]%
+        {snyder2017most}
+\bibfield{author}{\bibinfo{person}{Peter Snyder}, \bibinfo{person}{Cynthia
+  Taylor}, {and} \bibinfo{person}{Chris Kanich}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Most websites don't need to vibrate: A cost-benefit
+  approach to improving browser security}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the ACM SIGSAC Conference on
+  Computer and Communications Security}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Starov, Laperdrix, Kapravelos, and
+  Nikiforakis}{Starov et~al\mbox{.}}{2019}]%
+        {extbloat-www2019}
+\bibfield{author}{\bibinfo{person}{Oleksii Starov}, \bibinfo{person}{Pierre
+  Laperdrix}, \bibinfo{person}{Alexandros Kapravelos}, {and}
+  \bibinfo{person}{Nick Nikiforakis}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{Unnecessarily Identifiable: Quantifying the
+  fingerprintability of browser extensions due to bloat}}. In
+  \bibinfo{booktitle}{\emph{{Proceedings of the World Wide Web Conference
+  (WWW)}}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Trickel, Starov, Kapravelos, Nikiforakis, and
+  Doupe}{Trickel et~al\mbox{.}}{2019}]%
+        {cloakx-sec19}
+\bibfield{author}{\bibinfo{person}{Erik Trickel}, \bibinfo{person}{Oleksii
+  Starov}, \bibinfo{person}{Alexandros Kapravelos}, \bibinfo{person}{Nick
+  Nikiforakis}, {and} \bibinfo{person}{Adam Doupe}.}
+  \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{Everyone is Different: Client-side Diversification
+  for Defending Against Extension Fingerprinting}}. In
+  \bibinfo{booktitle}{\emph{{Proceedings of the USENIX Security Symposium}}}.
+\newblock
+
+
+\end{thebibliography}
