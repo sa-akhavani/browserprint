@@ -1,7 +1,7 @@
 const fs = require('fs')
 const reportsDir = ('../reports')
-const firefoxDir = ('/firefox')
-const chromeDir = ('/chrome')
+const firefoxDir = ('/incognito/firefox')
+const chromeDir = ('/incognito/chrome')
 const fingerprintingApis = require('../../dataset/fingerprint-api.js')
 stack = [];
 CHROME_START_VERSION = 49
@@ -147,7 +147,9 @@ async function printResults(finalReport) {
     console.log('Browser, FeaturesSize, FingerprintingApiSize, AddedFeatureSize, RemovedFeatureSize, UniqueFeatureSize')
     // Browser-Feature
     for (report of finalReport) {
-        console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}, ${report.addedFeaturesSize}, ${report.removedFeaturesSize}, ${report.differentFeaturesSet.size}`)
+        // console.log(report)
+        // break
+        console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}`)
     }
 
     // console.log(finalReport)
@@ -356,8 +358,8 @@ async function generateBrowserResults(browserType = 'chrome') {
 
 async function main() {
     // await generateBrowserResults('chrome');
-    // await generateBrowserResults('firefox');
-    await generateFeatureResults();
+    await generateBrowserResults('firefox');
+    // await generateFeatureResults();
 }
 
 

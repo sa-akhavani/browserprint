@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const serverUrl = 'https://browserprint.lab.kapravelos.com/f76c59afe011dd73ef08c58fccc34acd00704e3eebb7ed82ef0adbdb978ac7c9'
 const reportsUrl = 'report'
-const reportListFile = '../../dataset/browser-report-list.js';
+const reportListFile = '../../dataset/browser-incognito-report-list.js';
 const reportsFilePath = '../reports'
 
 
@@ -30,7 +30,7 @@ async function main() {
 
   for (report of reportList) {
     let reportData = await asyncRequest(serverUrl + '/' + reportsUrl + '/' + report.uuid);
-    let fileName = reportsFilePath + '/' + report.browser + '-' + report.version + '.json';
+    let fileName = reportsFilePath + '/incognito/' + report.browser + '-' + report.version + '.json';
     fs.writeFileSync(fileName, JSON.stringify(reportData));
   }
 }
