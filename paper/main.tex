@@ -1,23 +1,26 @@
-\documentclass[sigconf, anonymous]{acmart}
-\usepackage{subcaption}
-\usepackage{minted}
-\usepackage{xcolor}
+\documentclass[runningheads]{llncs}
+
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{tabulary}
-\usepackage{todonotes}
-
-\newcommand\ali[1]{\textcolor{blue}{#1}}
+\usepackage{graphicx}
 
 \begin{document}
-\sloppy
+
 \title{Browserprint: An Analysis of the Impact of Browser Features on Fingerprintability and Browser Security}
+\titlerunning{Browserprint: Impact of Browser Features on Fingerprintability and Security}
 
-% \author[1]{Seyed Ali Akhavani}
 
-\input{definitions}
-\input{abstract}
+
+
+\author{Anonymous Authors}
+\institute{Some Department, Somewhere}
+\authorrunning{Anonymous Authors}
+
+\UseRawInputEncoding
 \maketitle
+
+\input{abstract}
 \input{introduction}
 \input{research_questions}
 \input{methodology}
@@ -25,6 +28,6 @@
 \input{related-work}
 \input{conclusion}
 
-\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{splncs04}
 \bibliography{main}
 \end{document}

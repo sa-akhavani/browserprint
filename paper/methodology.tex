@@ -16,30 +16,31 @@ created the datasets we used in our analyses.
 \subsection{Feature Gathering}
 \label{sec:feature-gathering}
 
-In order to collect ``feature'' sets from Firefox and Chrome, we
-redirect the browser under analysis to a JavaScript-instrumented web
-page. We use the term \textit{feature} to describe JavaScript objects,
-methods, and property values built into the global namespace of the
-browser's JavaScript implementation (i.e., the \texttt{window}
-object). Clearly, this definition is JavaScript-centric. However, it
-is unambiguous and naturally scalable. That is, we can automate the
-collection of features from many different browser implementations
-using standard scripting and crawling techniques. When the
-instrumented page is loaded by the browser, our JavaScript is executed
-that then probes and iterates through the features supported by the
-browser. This is done by using JavaScript to traverse the tree of
-non-cyclic JavaScript object references accessible from a pristine
-(i.e., unmodified) \texttt{window} object, and collecting the full
-feature names encountered during the traversal. Each feature name
-comprises the sequence of property names leading from the global
-object to a given built-in JavaScript value. The traversal code is
-careful to not modify this object (which doubles as the global
-variable namespace) in any way, to avoid contaminating the resulting
-set of feature names. Captured feature sets are then stored in a
-database, tagged with identifying metadata such as the browser's
-User-Agent string.
+In order to collect \textit{browser feature} sets from Firefox and
+Chrome, we redirect the browser under analysis to a
+JavaScript-instrumented web page. We use the term \textit{feature} to
+describe JavaScript objects, methods, and property values built into the
+global namespace of the browser's JavaScript implementation (i.e., the
+\texttt{window} object).  Clearly, this definition is
+JavaScript-centric. However, it is unambiguous and naturally scalable,
+as we can automate the collection of features from many different
+browser implementations using standard scripting and crawling
+techniques. When the instrumented page is loaded by the browser, our
+JavaScript is executed.  This code probes and iterates through the
+features supported by the browser. This is done by using JavaScript to
+traverse the tree of non-cyclic JavaScript object references accessible
+from a pristine (i.e., unmodified by polyfills or other prototype-chain
+modifications) \texttt{window} object, and collecting the full feature
+names encountered during the traversal. Each feature name comprises the
+sequence of property names leading from the global object to a given
+built-in JavaScript value. The traversal code is careful to not modify
+this object (which doubles as the global variable namespace) in any way,
+to avoid contaminating the resulting set of feature names. Captured
+feature sets are then stored in a database, tagged with identifying
+metadata such as the browser's User-Agent string.
 
-We use the terms \textit{browser features}, as defined in this section, and \textit{JavaScript APIs} interchangeably in our work.
+We use the terms \textit{browser features}, as defined in this section,
+and \textit{JavaScript APIs} interchangeably in our work.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
