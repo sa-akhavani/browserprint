@@ -69,27 +69,20 @@ their browsers more difficult to fingerprint.
     \label{fig:fingerprint-apis}
 \end{figure}
 
-We also collected the feature set for Google Chrome's Incognito mode
-and also Firefox's Private Window mode in the corresponding browser versions
-in our data gathering part to measure the fingerprintability of these browsers
-while using these modes.
-We found out that there is a small difference between the total number of features in the
-regular mode versus the total number of features in the Incognito mode. 
-For instance, Chrome 80's regular mode has 11946 features while it has 11936 features
-in Incognito mode. We could say the same for Firefox's regular mode versus its Private Window Mode too.  
-For example, Firefox 75's regular mode has 6370 total features while its Private Widnow Mode has 6358 features.
-This was predictable since there are some features disabled in Incognito mode soo the number of available JS APIs
-should be less than the regular mode.
+As a part of our experiments, we also collected the feature sets for Google
+Chrome's Incognito and Firefox's Private Window modes and measured the
+fingerprintability of the browsers in these modes. For Chrome, our results show
+that there is a small difference between the total number of features in regular
+mode versus the total number of features in incognito mode.  For instance,
+Chrome 80's regular mode has 11,946 features while it has 11,936 features
+available in Incognito mode. The results were similar for Firefox's regular mode
+versus its Private Window Mode. For example, Firefox 75's regular mode has 6370
+total features while its Private Window Mode has 6358 features available. 
 
-After analysing the feature sets between these two modes, we focus on the difference 
-in fingerprintability between regular mode and Incognito mode.
-Surprisingly, for each Chrome version, all features that appear in the suspicious fingerprinting
-APIs list in regular mode also appear in its Incognito mode's suspicious fingerprinting APIs.
-The same happens in Firefox too. The fingerprinting APIs existing in a Firefox version's regular mode and private
-window mode are identical. Thus we could conclude that Incognito mode and
-private window mode do not help users against browser fingerprinting since every fingerprinting API that exists in
-a version's normal mode, also appears in the same browser version's Incognito (or Private Window) mode.
-
+Hence, we conclude that that the incognito and private window modes do not help
+users against browser fingerprinting since every fingerprinting API that exists
+in a version's normal mode also appears in the same browser version's Incognito
+(or Private Window) mode.
 
 \subsubsection{Unique Feature Set}
 
