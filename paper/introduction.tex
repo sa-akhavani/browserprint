@@ -34,10 +34,11 @@ as well as browser vendors themselves (e.g.,~\cite{safari-privacy,brave-fpbudget
  To date, however, no
 studies have looked at popular browsers historically and have
 attempted to determine how their fingerprintability has evolved over
-the years. Analogously, we are also not aware of studies that have
-looked into how, and if, the increase in the number of new features
-integrated into the browsers every year have contributed to an
-increase in the number of reported vulnerabilities.
+the years.
+% Analogously, we are also not aware of studies that have
+% looked into how, and if, the increase in the number of new features
+% integrated into the browsers every year have contributed to an
+% increase in the number of reported vulnerabilities.
 
 In this paper, we perform an empirical analysis of a large number of
 browser features that have been integrated or phased out of the
@@ -60,14 +61,15 @@ presented in literature, we conclude that all of these browser
 versions are uniquely fingerprintable. Our results suggest the
 alarming trend that browsers are becoming more fingerprintable over
 time as newer versions of popular browsers have more fingerprintable
-APIs embedded in them. Another key finding of our study is that unlike
-the popular folk wisdom that software bloating always leads to more
-security vulnerabilities~\cite{Bloating}, the number of
-vulnerabilities in browsers are not directly correlated to the number
-of new features being supported by those browsers. In fact, our
-measurements suggest that browsers are becoming more secure over time
-even though they are supporting more features and are becoming more
-``bloated''.
+APIs embedded in them. 
+% Another key finding of our study is that unlike
+% the popular folk wisdom that software bloating always leads to more
+% security vulnerabilities~\cite{Bloating}, the number of
+% vulnerabilities in browsers are not directly correlated to the number
+% of new features being supported by those browsers. In fact, our
+% measurements suggest that browsers are becoming more secure over time
+% even though they are supporting more features and are becoming more
+% ``bloated''.
 
 This paper makes the following key contributions:
 
@@ -83,10 +85,10 @@ This paper makes the following key contributions:
   ones), Chrome, in contrast, is growing and more features are kept as
   the browser evolves.
 
-\item As Firefox and Chrome are becoming more ``bloated'' over time
-  and as their sizes increase, there is no direct correlation between
-  the total number of features in the browsers and the number of
-  vulnerabilities that are reported.
+% \item As Firefox and Chrome are becoming more ``bloated'' over time
+%   and as their sizes increase, there is no direct correlation between
+%   the total number of features in the browsers and the number of
+%   vulnerabilities that are reported.
 
 \item We provide all the source code and datasets that we have collected in our experiments to the community.\footnote{\url{https://anonymous.4open.science/r/52ebbe26-5827-464a-b6e7-bc9d8c1101bb}}
 
@@ -95,8 +97,10 @@ This paper makes the following key contributions:
 The rest of the paper is organized as follows: The next section lists
 the research questions we aimed to answer in this study. Section
 \ref{sec:methodology} describes our methodology and data gathering
-techniques. Section \ref{sec:analysis} presents a different analysis
-based on the feature reports and their relation to browser
-vulnerability. In Section \ref{sec:related-work}, we present the
+techniques.
+% Section \ref{sec:analysis} presents a different analysis
+% based on the feature reports and their relation to browser
+% vulnerability.
+In Section \ref{sec:related-work}, we present the
 related work and then briefly conclude the paper in Section
 \ref{sec:conclusion}.
