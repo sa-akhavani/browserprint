@@ -1,5 +1,10 @@
 [{
     browser: "chrome",
+    version: "91",
+    uuid: "0cc0a09a-f8f6-427b-9f71-57318bafaae6",
+    os: "iphone11 pro"
+}, {
+    browser: "chrome",
     version: "86",
     uuid: "d2502cb8-9dad-466f-b63a-a8b4157006f7",
     os: "iphone11 pro"
