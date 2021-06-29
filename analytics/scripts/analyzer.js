@@ -1,13 +1,17 @@
 const fs = require('fs')
 const reportsDir = ('../reports')
-const firefoxDir = ('/incognito/firefox')
-const chromeDir = ('/incognito/chrome')
+const firefoxDir = ('/firefox')
+const chromeDir = ('/chrome')
+const operaDir = ('/opera')
+const mobileDir = ('/mobile')
 const fingerprintingApis = require('../../dataset/fingerprint-api.js')
 stack = [];
 CHROME_START_VERSION = 49
 CHROME_END_VERSION = 81
 FIREFOX_START_VERSION = 45
 FIREFOX_END_VERSION = 75
+OPERA_START_VERSION = 36
+OPERA_END_VERSION = 68
 
 
 async function union(setA, setB) {
@@ -144,23 +148,13 @@ async function generateComparisonResults(finalReport) {
 }
 
 async function printResults(finalReport) {
-    console.log('Browser, FeaturesSize, FingerprintingApiSize, AddedFeatureSize, RemovedFeatureSize, UniqueFeatureSize')
-    // Browser-Feature
+    console.log('Browser, FeaturesSize, FingerprintingApiSize, AddedFeatureSize, RemovedFeatureSize, UniqueFeatureSize, isUnique')
     for (report of finalReport) {
-        // console.log(report)
-        // break
-        console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}`)
+        if (report.addedFeatures)
+            console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}, ${report.addedFeatures.size}, ${report.removedFeatures.size}, ${report.differentFeatures.size}, ${report.isUnique}`)
+        else
+            console.log(`${report.browser}, ${report.features.size}, ${report.fingerprintApis.size}, 0, 0, ${report.differentFeatures.size}, ${report.isUnique}`)
     }
-
-    // console.log(finalReport)
-    //    for (report of finalReport) {
-    // console.log(report);
-    // if (report.addedFeatures)
-    //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: ${report.addedFeatures.size}  RemovedFeaturesSize: ${report.removedFeatures.size}`);
-    // else
-    //     console.log(`${report.browser}: isUnique: ${report.isUnique} AllFeaturesSize: ${report.features.size} AddedFeaturesSize: 0  RemovedFeaturesSize: 0`);
-    // console.log('---------------')
-    //    }
 }
 
 async function printFeatureResults(finalReport) {
@@ -175,7 +169,12 @@ async function printFeatureResults(finalReport) {
     chadded = 0
     chremoved = 0
     chexperimental = 0
-    isCommon = 0
+    opadded = 0
+    opremoved = 0
+    opexperimental = 0
+    isCommonChFf = 0
+    isCommonChOp = 0
+    isCommonFfOp = 0
     for (const report of finalReport) {
         if (report.firefoxCategory == 'permanently added')
             ffadded++
@@ -189,12 +188,23 @@ async function printFeatureResults(finalReport) {
             chremoved++
         if (report.chromeCategory == 'experimental')
             chexperimental++
-        if (report.isCommon)
-            isCommon++
+        if (report.operaCategory == 'permanently added')
+            opadded++
+        if (report.operaCategory == 'permanently removed')
+            opremoved++
+        if (report.operaCategory == 'experimental')
+            opexperimental++            
+        if (report.isCommonChFf)
+            isCommonChFf++
+        if (report.isCommonChOp)
+            isCommonChOp++            
+        if (report.isCommonFfOp)
+            isCommonFfOp++            
     }
     console.log(`firefox, ${ffadded}, ${ffremoved}, ${ffexperimental}`)
     console.log(`chrome, ${chadded}, ${chremoved}, ${chexperimental}`)
-    console.log(`isCommon: ${isCommon}`)
+    console.log(`opera, ${opadded}, ${opremoved}, ${opexperimental}`)
+    console.log(`isCommonChFf: ${isCommonChFf} --- isCommonChOp: ${isCommonChOp} --- isCommonFfOp: ${isCommonFfOp}`);
 }
 
 
@@ -204,6 +214,7 @@ async function determineFeatureCategory(browserList, browserType) {
         b = b.replace('.json', '')
         b = b.replace('firefox-', '')
         b = b.replace('chrome-', '')
+        b = b.replace('opera-', '')
         b = parseInt(b)
         list.push(b)
     }
@@ -235,8 +246,20 @@ async function determineFeatureCategory(browserList, browserType) {
                 return 'permanently added'
         }
         return 'experimental'
+    } else if (browserType == 'opera') {
+        if (sorted[sorted.length - 1] != OPERA_END_VERSION) {
+            if (sorted[sorted.length - 2])
+                if (sorted[sorted.length - 2] != OPERA_END_VERSION - 1)
+                    return 'permanently removed'
+        } else {
+            if (sorted.length == OPERA_END_VERSION - sorted[0] + 1)
+                return 'permanently added'
+        }
+        return 'experimental'
     }
-    return 'unknown browser type'
+
+    //unknown browser type
+    return null
 }
 
 async function generateFeatureResults() {
@@ -245,9 +268,11 @@ async function generateFeatureResults() {
 
     let chDir = reportsDir + chromeDir;
     let ffDir = reportsDir + firefoxDir;
+    let opDir = reportsDir + operaDir;
 
     let chReportFileList = fs.readdirSync(chDir);
     let ffReportFileList = fs.readdirSync(ffDir);
+    let opReportFileList = fs.readdirSync(opDir);
 
     let finalReport = [];
 
@@ -273,31 +298,56 @@ async function generateFeatureResults() {
         browserFeatureList.push(browserFeatureData);
     }
 
+    for (let browserFile of opReportFileList) {
+        let featuresObject = await parseFile(opDir + '/' + browserFile);
+        let featuresSet = await extractFeatureNames(featuresObject);
+        allFeaturesSet = await union(allFeaturesSet, featuresSet);
+        let browserFeatureData = {
+            browser: browserFile,
+            features: featuresSet,
+        };
+        browserFeatureList.push(browserFeatureData);
+    }
+
     for (let feature of allFeaturesSet) {
         let firefoxList = [];
         let chromeList = [];
+        let operaList = [];
         for (let browser of browserFeatureList) {
             if (browser.features.has(feature)) {
                 if (browser.browser.includes('chrome'))
                     chromeList.push(browser.browser);
                 else if (browser.browser.includes('firefox'))
                     firefoxList.push(browser.browser)
+                else if (browser.browser.includes('opera'))
+                    operaList.push(browser.browser)
             }
         }
 
         chromeCategory = await determineFeatureCategory(chromeList, 'chrome');
         firefoxCategory = await determineFeatureCategory(firefoxList, 'firefox');
-        let isCommon = false;
-        if (chromeCategory && firefoxCategory)
-            isCommon = true
+        operaCategory = await determineFeatureCategory(operaList, 'opera');
+        let isCommonChFf = false;
+        let isCommonChOp = false;
+        let isCommonFfOp = false;
 
+        //todo check here
+        if (chromeCategory && firefoxCategory)
+            isCommonChFf = true
+        if (chromeCategory && operaCategory)
+            isCommonChOp = true
+        if (firefoxCategory && operaCategory)
+            isCommonFfOp = true
         finalReport.push({
             'feature': feature,
             'chromelist': chromeList,
             'firefoxlist': firefoxList,
             'chromeCategory': chromeCategory,
             'firefoxCategory': firefoxCategory,
-            'isCommon': isCommon,
+            'operaCategory': operaCategory,
+            'isCommonChFf': isCommonChFf,
+            'isCommonChOp': isCommonChOp,
+            'isCommonFfOp': isCommonFfOp,
         })
     }
 
@@ -337,7 +387,10 @@ async function generateBrowserResults(browserType = 'chrome') {
         repDir = reportsDir + chromeDir;
     else if (browserType == 'firefox')
         repDir = reportsDir + firefoxDir;
-
+    else if (browserType == 'opera')
+        repDir = reportsDir + operaDir;
+    else if (browserType == 'mobile')
+        repDir = reportsDir + mobileDir;
     let browserReportFileList = fs.readdirSync(repDir);
     let finalReport = [];
     for (let browserFile of browserReportFileList) {
@@ -358,8 +411,10 @@ async function generateBrowserResults(browserType = 'chrome') {
 
 async function main() {
     // await generateBrowserResults('chrome');
-    await generateBrowserResults('firefox');
-    // await generateFeatureResults();
+    // await generateBrowserResults('firefox');
+    // await generateBrowserResults('opera');
+    // await generateBrowserResults('mobile');
+    await generateFeatureResults();
 }
 
 
