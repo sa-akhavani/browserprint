@@ -42,7 +42,7 @@ the years.
 
 In this paper, we perform an empirical analysis of a large number of
 browser features that have been integrated or phased out of the
-popular Mozilla Firefox and the Google Chrome browsers between the
+popular Mozilla Firefox, the Google Chrome, and the Opera browsers between the
 years 2016 and 2020. We consider browser features to be all
 functionality that is available to attackers directly through
 JavaScript, since these are the root problem of most web attacks. Our
@@ -53,7 +53,7 @@ fingerprintability of browser versions that rely on the number of
 browser features that are associated with fingerprinting based on
 previous research and current fingerprinting techniques discovered in
 the wild (see Section~\ref{sec:fp-apis} for more details). By
-analyzing 33 Google Chrome and 31 Mozilla Firefox major browser
+analyzing 33 Google Chrome, 31 Mozilla Firefox, and 33 Opera major browser
 versions, our results suggest that these popular browsers have unique
 feature sets that make them significantly different from each
 other. Hence, by comparing these features to the fingerprinting APIs
@@ -62,11 +62,12 @@ versions are uniquely fingerprintable. Our results suggest the
 alarming trend that browsers are becoming more fingerprintable over
 time as newer versions of popular browsers have more fingerprintable
 APIs embedded in them. 
-% Another key finding of our study is that unlike
-% the popular folk wisdom that software bloating always leads to more
-% security vulnerabilities~\cite{Bloating}, the number of
-% vulnerabilities in browsers are not directly correlated to the number
-% of new features being supported by those browsers. In fact, our
+\ali{SHOULD WE REMOVE THIS? Another key finding of our study is that unlike
+the popular folk wisdom that software bloating always leads to more
+security vulnerabilities~\cite{Bloating}, the number of
+vulnerabilities in browsers are not directly correlated to the number
+of new features being supported by those browsers.}
+% In fact, our
 % measurements suggest that browsers are becoming more secure over time
 % even though they are supporting more features and are becoming more
 % ``bloated''.
@@ -75,22 +76,29 @@ This paper makes the following key contributions:
 
 \begin{itemize}
 
-\item We show that all major Mozilla Firefox and Google Chrome browser
-  versions between 2016 until today are uniquely fingerprintable.
+\item We show that all major Mozilla Firefox, Google Chrome, and Opera browser
+  versions between 2016 until 2020 are uniquely fingerprintable.
 
-\item We analyze both Mozilla Firefox and Google Chrome and report
+\item We analyze Mozilla Firefox, Google Chrome, and Opera and report
   major differences between feature introduction and removal
   trends. While Firefox tends to keep a steady number of features in
   the browser (i.e., introducing new features while removing older
   ones), Chrome, in contrast, is growing and more features are kept as
-  the browser evolves.
+  the browser evolves. Opera, similar to Chrome, seems to be adding lots
+  of features and not interested in removing the older ones.
+
+\item We show that although Google Chrome and Opera are both based upon
+  Chromium and share the same codebase, there are still differences in their
+  feature introduction and removal patterns. But this shared codebase makes them
+  very similar in our fingerprintability analysis.
 
 % \item As Firefox and Chrome are becoming more ``bloated'' over time
 %   and as their sizes increase, there is no direct correlation between
 %   the total number of features in the browsers and the number of
 %   vulnerabilities that are reported.
 
-\item We provide all the source code and datasets that we have collected in our experiments to the community.\footnote{\url{https://anonymous.4open.science/r/52ebbe26-5827-464a-b6e7-bc9d8c1101bb}}
+\item We provide all the source code and datasets that we have collected in our experiments to the community.
+\footnote{\url{https://anonymous.4open.science/r/52ebbe26-5827-464a-b6e7-bc9d8c1101bb}}
 
 \end{itemize}
 

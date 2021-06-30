@@ -1,23 +1,23 @@
 \section{Research Questions}
-\label{sec:introduction}
+\label{sec:research}
 
 In this paper, by performing an automated analysis, we attempt to
 answer the following research questions:
 
 \begin{enumerate}
   
-\item {\em Are major versions of Firefox and Chrome browsers
-    fingerprintable?} Our results suggest that the feature set for each
-  Firefox and Chrome browser version is unique. There exist multiple
+\item {\em Are major versions of Firefox, Chrome, and Opera browsers
+  fingerprintable?} Our results suggest that the feature set for each
+  browser version is unique. There exist multiple
   APIs in every browser version that we have analyzed that can be used
   for fingerprinting. By extracting all the features supported by a
   browser using API calls, we can indeed uniquely identify each
   browser version.
 
-\item {\em Are Firefox and Chrome browsers becoming more
-    fingerprintable over time?} One of the major conclusions of our
+\item {\em Are Firefox, Chrome, and Opera becoming more
+  fingerprintable over time?} One of the major conclusions of our
   study is that the number of APIs one can use in the newer versions
-  of Chrome and Firefox is larger than in older versions. Hence, newer
+  of Chrome, Opera, and Firefox is larger than the older versions. Hence, newer
   browser versions are even more fingerprintable than previous
   versions, and our findings suggest that this trend is likely to
   continue. As a result, privacy might be an even more significant
@@ -33,12 +33,12 @@ answer the following research questions:
   browsers are indeed becoming more ``bloated'' as they evolve.
 
 \item {\em With respect to browser bloating, how does Firefox compare
-    to Chrome?} In our study, we were able to map the number of unique
-  features for major versions of Firefox and Chrome. The results
-  suggest that Chrome is introducing more features over time than
-  Firefox, but that both browser vendors have shown a significant
+    to Chrome and Opera?} In our study, we were able to map the number of unique
+  features for major versions of Firefox, Chrome, and Opera. The results
+  suggest that Chrome and Opera are introducing more features over time than
+  Firefox, but that all of these browser vendors have shown a significant
   increase in the total number of features they support per version
-  since 2016. Compared to Firefox, Chrome tends to introduce more new
+  since 2016. Compared to Firefox, Chrome and Opera tend to introduce more new
   features and keep them around longer.
  
 % \item {\em Is there a correlation between the number of features
@@ -52,10 +52,17 @@ answer the following research questions:
 %   secure.
 
 \item {\em Could the incognito mode in Chrome and the private window mode in
-Firefox reduce the possibility of being fingerprinted by websites?} Our analysis
-suggests that the incognito and private window modes have negligible impact on
-reducing fingerprinting. That is, almost all fingerprinting APIs are accessible
-in these modes the same way that they are available in non-private mode.
+  Firefox and Opera reduce the possibility of being fingerprinted by websites?} Our analysis
+  suggests that the incognito and private window modes have negligible impact on
+  reducing fingerprinting. That is, almost all fingerprinting APIs are accessible
+  in these modes the same way that they are available in non-private mode.
     
+\item {\em Although Opera and Chrome are both Chromium-based and share the same codebase,
+  is there any noticable difference between these two browsers in case of fingerprintability?}
+  In our analysis, we find out that Opera and Chrome have very similar sets of fingerprintable APIs
+  and there is not much difference between these two browsers in case of fingerprintability.
+  But there exists differences in feature adding and removal patterns between two browsers.
+  Majority of Opera features are added and removed from the browser from time to time. While Chrome
+  keeps majority of its features untouched.
 \end{enumerate}
 

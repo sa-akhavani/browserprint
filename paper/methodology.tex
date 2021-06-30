@@ -8,15 +8,14 @@ a specific version because attackers typically target such features in
 attacks (e.g., a bug in the video access functionality might be
 exploited). Hence, to answer the research questions we pose in this
 study, we need to be able to figure out exactly what features are
-supported by each browser version under analysis, and we also need
-access to vulnerability data for each browser. In this section, we
+supported by each browser version under analysis. In this section, we
 describe the methodology we followed in this work, and explain how we
 created the datasets we used in our analyses.
 
 \subsection{Feature Gathering}
 \label{sec:feature-gathering}
 
-In order to collect \textit{browser feature} sets from Firefox and
+In order to collect \textit{browser feature} sets from Firefox, Opera, and
 Chrome, we redirect the browser under analysis to a
 JavaScript-instrumented web page. We use the term \textit{feature} to
 describe JavaScript objects, methods, and property values built into the
@@ -50,13 +49,12 @@ and \textit{JavaScript APIs} interchangeably in our work.
 
 \subsection{Browser Testing Platform}
 
-In this work, we decided to target Google Chrome and Mozilla
-Firefox browsers as they are well-known, popular browsers that have
-millions of users. Also, these browsers possess distinct codebases
-(i.e., unlike Microsoft Edge that is based on Google Chrome). We
-gathered a copy of every major Firefox and Chrome version that was
+In this work, we decided to target Google Chrome, Mozilla
+Firefox, and Opera browsers as they are well-known, popular browsers that have
+millions of users. Firefox possesses a distinct codebase unlike Chrome and Opera
+which are both based on Chromium. We gathered a copy of every major Firefox, Chrome, and Opera version that was
 released during the March 2016 to April 2020 timeframe (i.e., Chrome
-versions 49 to 81, and Firefox versions 45 to 75).
+versions 49 to 81, Firefox versions 45 to 75, and Opera versions 36 to 68).
 
 To individually connect each browser version to our instrumented
 feature gathering web application, we mainly used the BrowserStack web
