@@ -1,8 +1,7 @@
-\subsubsection{Analyzing fingerprinting API presence in Chrome and
-  Firefox}
+\subsubsection{Analyzing fingerprinting API presence in Chrome, Firefox, and Opera}
 
 Recall that one of the key research questions we asked at the beginning of
-this paper was if popular browsers such as Firefox and Chrome are
+this paper was if popular browsers such as Firefox, Chrome, and Opera are
 generally becoming more fingerprintable over time. In particular, we
 were also interested in answering if every browser version is unique
 in a fingerprintability sense.
@@ -34,14 +33,19 @@ have started to decline. In fact, Firefox has indeed started to take
 the fingerprinting problem seriously and has been increasingly taking
 steps to prevent it (e.g.,~\cite{FirefoxFingerprinting}).
 
+In addition, Opera 36 (i.e., the oldest version in our study) contains 139
+suspicious fingerprinting APIs. On the other hand, Opera 68 (the latest Opera version in our measurement)
+is consist of 274 suspicious fingerprinting APIs. The trend is very similar to Google Chrome but there are minor
+differences at some points which could be seen in the figure \ref{fig:fingerprint-apis}.
+
 Figure \ref{fig:fingerprint-apis} depicts, in detail, the presence of
-fingerprinting APIs in Chrome and Firefox that we measured. Note that
+fingerprinting APIs in Chrome, Firefox, and Opera that we measured. Note that
 in January 2017, there is a significant increase in the number of
 fingerprinting APIs that each browser supports. More than 100
 fingerprinting APIs were added to both browsers. To determine what
 caused this spike, we investigated and analyzed the release notes of
-both Firefox 51~\cite{firefox-51-notes} and Chrome
-56~\cite{chrome-56-notes}.
+both Firefox 51~\cite{firefox-51-notes}, Chrome
+56~\cite{chrome-56-notes}, and Opera 43 which is based on Chromium 56~\cite{opera-43-notes}.
 
 The release notes indicate that HTML5 was enabled for all users by
 default in Chrome 56. As of this version, Adobe Flash Player was
@@ -52,12 +56,13 @@ context allows rendering using an API that conforms closely to the
 OpenGL ES 3.0
 API~\footnote{https://www.khronos.org/registry/webgl/specs/latest/2.0/}.
 Similarly, in Firefox 51, we observed that the browser had also added
-WebGL2 support during that time.
+WebGL2 support during that time. The same happened to Opera 43 since Chromium 56
+added WebGL2 support to its codebase.
 
 When we analyzed our fingerprinting API list, we saw that the 107 new
 fingerprinting APIs that became possible as of this date were actually
 related to \texttt{WebGL2RenderingContext} which was added to Firefox
-51 and Chrome 56. The straight-forward lesson to distill from our
+51, Chrome 56, and Opera 43. The straight-forward lesson to distill from our
 observation is that browser vendors need to be extra careful when they
 implement and release new features if they are interested in making
 their browsers more difficult to fingerprint.
@@ -65,19 +70,21 @@ their browsers more difficult to fingerprint.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{figures/Fingerprinting-APIs.png}
-    \caption{Presence of Fingerprinting APIs in Chrome and Firefox.}
+    \caption{Presence of Fingerprinting APIs in Chrome, Firefox, and Opera.}
     \label{fig:fingerprint-apis}
 \end{figure}
 
-As a part of our experiments, we also collected the feature sets for Google
-Chrome's Incognito and Firefox's Private Window modes and measured the
+As a part of our experiments, we also collected the feature sets for Firefox's Private Window,
+Google Chrome's Incognito, and Opera's Private Window. We measured the
 fingerprintability of the browsers in these modes. For Chrome, our results show
 that there is a small difference between the total number of features in regular
-mode versus the total number of features in incognito mode.  For instance,
+mode versus the total number of features in incognito mode. For instance,
 Chrome 80's regular mode has 11,946 features while it has 11,936 features
 available in Incognito mode. The results were similar for Firefox's regular mode
 versus its Private Window Mode. For example, Firefox 75's regular mode has 6,370
-total features while its Private Window Mode has 6,358 features available. 
+total features while its Private Window Mode has 6,358 features available. Besides,
+Opera's private window had the same fingerprinting APIs compared to the regular mode
+and had zero impact on reducing fingerprintability.
 
 Hence, we conclude that the incognito and private window modes do not help
 users against browser fingerprinting since every fingerprinting API that exists
@@ -110,8 +117,8 @@ browsers also make them more fingerprintable.
 %``debloating'' the software.
 
 One interesting trend is that the differences between the feature sets
-of Chrome and Firefox in their newer versions is becoming smaller.
+of Chrome, Firefox, and Opera in their newer versions is becoming smaller.
 That is, we observed much more intersections with each other than in
-older versions. Our data suggest that the feature sets for both
-Firefox and Chrome are converging towards homogeneity of browser
+older versions. Our data suggest that the feature sets for all
+Firefox, Chrome, and Opera are converging towards homogeneity of browser
 features.
