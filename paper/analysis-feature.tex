@@ -77,24 +77,25 @@ on adding and removing specific features through time.
 
   In this work, we also performed an analysis of the common features
   between Firefox, Chrome, and Opera. Since 2016, the total number of features
-  introduced by both these browsers is 15,945. Among all these features,
+  introduced by these browsers is 15,945. Among all these features,
   there exists only 4,843 common features among Firefox and Chrome -- which is
   approximately 30\% of the total number of features that these
   vendors support. This number is the same between Firefox and Opera too and
-  there are 4,843 common features between them. Hence, we can conclude that Firefox
-  does not have a high overlap of the features with Chrome and Opera. Note that
-  although these browsers often offer very similar functionality,
-  unsurprisingly, Firefox's codebase is very different and the APIs
-  thourgh which these features are available are also often
-  significantly different. As a result, it is clear that
-  vulnerabilities in these browsers will be very specific to the
-  version and vendor.
-
-  To the contrary, Chrome and Opera share the same codebase. This leads to having
-  a bigger set of common features between these two browsers. There exists 13,558 
+  there are 4,843 common features between them. On the other hand, Chrome and Opera
+  have a bigger set of common features. There exists 13,558 
   common features between Opera and Chrome -- which is approximately 85\% of the total
   number of features that these vendors support. The impact of this huge common features set
   on fingerprintability between two browsers are analyzed in the next section.
+
+  We can conclude that Firefox does not have a high overlap of the features with Chrome and Opera.
+  Note that although these browsers often offer very similar functionality,
+  unsurprisingly, their codebase might be very different from each other.
+  We are aware that Firefox's codebase is very different from Chrome's and Opera's.
+  Hence the APIs thourgh which these features are available are also often
+  significantly different. As a result, it is clear that
+  vulnerabilities in these browsers will be very specific to the
+  version and vendor. To the contrary, Chrome and Opera share the same codebase.
+  This leads to having a bigger set of common features between these two browsers.
 
   Figures \ref{fig:ffaddremove} and \ref{fig:chaddremove} show the
   feature addition and removal trends for Firefox and Chrome. The data
@@ -104,7 +105,8 @@ on adding and removing specific features through time.
   respect to the number of new features added, and older features
   removed. Hence, Firefox seems to be more aggressive with respect to
   removing older features from the browser, and hence, ``debloating''
-  the software. This trend is very similar for Chrome and Opera.
+  the software. This trend is very similar for Chrome and Opera so we avoided
+  to put a separate graph for Opera.
 
 \begin{figure}[ht]
     \centering
