@@ -12,10 +12,10 @@ them. At the same time, many companies are interested in collecting
 the private browser activities of end-users for marketing and sales
 purposes. To achieve their data collection objectives, some web
 services use ``browser fingerprinting'' to track and profile their
-users. Clearly, browser fingerprinting can be in stark contrast with
-the web privacy of browser users.
+users with clear disregard for their web privacy.
 
-As browsers are becoming increasingly entwined with operating systems,
+As browsers increasing supplant traditional operating systems as the
+application publishing platforms of choice, 
 many unique details of a user's browser such as its hardware,
 operating system, browser configuration and preferences can be exposed
 through the browser. An attacker who collects and sums these outputs
@@ -35,6 +35,10 @@ as well as browser vendors themselves (e.g.,~\cite{safari-privacy,brave-fpbudget
 studies have looked at popular browsers historically and have
 attempted to determine how their fingerprintability has evolved over
 the years.
+Past work has demonstrated that the ability to simply fingerprinting a browser's precise version without relying on possibly spoofed User-Agent strings can be useful to attackers~\cite{schwarz2019javascript}.
+In the further light of web privacy research showing the potential and/or real-world exploitation of novel APIs for fingerprinting \cite{olejnik2017, acar2014web, englehardt2016online}, we consider the raw volume of implemented APIs to be a rough but useful proxy estimate of a browser's potential fingerprintability.
+
+
 % Analogously, we are also not aware of studies that have
 % looked into how, and if, the increase in the number of new features
 % integrated into the browsers every year have contributed to an
