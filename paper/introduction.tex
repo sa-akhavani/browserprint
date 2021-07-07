@@ -5,10 +5,7 @@ Web browsers have become indispensable in our daily lives. The
 majority of the online activity of many Internet users comprises of
 using a browser to access social media, online shopping, surfing the
 web, messaging, and accessing stored information in the cloud.
-Unfortunately, as browsers have become critical and important
-infrastructure components in our lives, they have also become
-attractive targets for attackers who are looking into compromising
-them. At the same time, many companies are interested in collecting
+Unfortunately, many companies are interested in collecting
 the private browser activities of end-users for marketing and sales
 purposes. To achieve their data collection objectives, some web
 services use ``browser fingerprinting'' to track and profile their
@@ -35,7 +32,7 @@ as well as browser vendors themselves (e.g.,~\cite{safari-privacy,brave-fpbudget
 studies have looked at popular browsers historically and have
 attempted to determine how their fingerprintability has evolved over
 the years.
-Past work has demonstrated that the ability to simply fingerprinting a browser's precise version without relying on possibly spoofed User-Agent strings can be useful to attackers~\cite{schwarz2019javascript}.
+Past work has demonstrated that the ability to simply fingerprint a browser's precise version without relying on possibly spoofed \texttt{User-Agent} strings can be useful to attackers~\cite{schwarz2019javascript}.
 In the further light of web privacy research showing the potential and/or real-world exploitation of novel APIs for fingerprinting \cite{olejnik2017, acar2014web, englehardt2016online}, we consider the raw volume of implemented APIs to be a rough but useful proxy estimate of a browser's potential fingerprintability.
 
 
@@ -66,22 +63,22 @@ versions are uniquely fingerprintable. Our results suggest the
 alarming trend that browsers are becoming more fingerprintable over
 time as newer versions of popular browsers have more fingerprintable
 APIs embedded in them. 
-\ali{SHOULD WE REMOVE THIS? Another key finding of our study is that unlike
-the popular folk wisdom that software bloating always leads to more
-security vulnerabilities~\cite{Bloating}, the number of
-vulnerabilities in browsers are not directly correlated to the number
-of new features being supported by those browsers.}
+%\ali{SHOULD WE REMOVE THIS? Another key finding of our study is that unlike
+% the popular folk wisdom that software bloating always leads to more
+% security vulnerabilities~\cite{Bloating}, the number of
+% vulnerabilities in browsers are not directly correlated to the number
+% of new features being supported by those browsers.}
 % In fact, our
 % measurements suggest that browsers are becoming more secure over time
 % even though they are supporting more features and are becoming more
 % ``bloated''.
 
-This paper makes the following key contributions:
-
-\begin{itemize}
+\noindent This paper makes the following key contributions:
+%
+\begin{itemize}%[noitemsep,topsep=0pt]
 
 \item We show that all major Mozilla Firefox, Google Chrome, and Opera browser
-  versions between 2016 until 2020 are uniquely fingerprintable.
+  versions between 2016 until 2020 are uniquely fingerprintable based exclusively on the presence or absence of browser features.
 
 \item We analyze Mozilla Firefox, Google Chrome, and Opera and report
   major differences between feature introduction and removal
@@ -101,18 +98,17 @@ This paper makes the following key contributions:
 %   the total number of features in the browsers and the number of
 %   vulnerabilities that are reported.
 
-\item We provide all the source code and datasets that we have collected in our experiments to the community.
-\footnote{\url{https://anonymous.4open.science/r/52ebbe26-5827-464a-b6e7-bc9d8c1101bb}}
+\item We provide all the source code and datasets that we have collected in our experiments to the community.\footnote{\url{https://anonymous.4open.science/r/52ebbe26-5827-464a-b6e7-bc9d8c1101bb}}
 
 \end{itemize}
 
-The rest of the paper is organized as follows: The next section lists
-the research questions we aimed to answer in this study. Section
-\ref{sec:methodology} describes our methodology and data gathering
-techniques.
-% Section \ref{sec:analysis} presents a different analysis
-% based on the feature reports and their relation to browser
-% vulnerability.
-In Section \ref{sec:related-work}, we present the
-related work and then briefly conclude the paper in Section
-\ref{sec:conclusion}.
+% The rest of the paper is organized as follows: The next section lists
+% the research questions we aimed to answer in this study. Section
+% \ref{sec:methodology} describes our methodology and data gathering
+% techniques.
+% % Section \ref{sec:analysis} presents a different analysis
+% % based on the feature reports and their relation to browser
+% % vulnerability.
+% In Section \ref{sec:related-work}, we present the
+% related work and then briefly conclude the paper in Section
+% \ref{sec:conclusion}.
