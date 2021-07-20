@@ -2,11 +2,11 @@
 \label{sec:methodology}
 
 To be able to determine how fingerprintable a browser is, we need to
-determine the features it supports when a web page is visited by the
+determine the features it supports when a webpage is visited by a
 user. Similarly, we need to understand which features are supported by
 a specific version because attackers typically target such features in
 attacks (e.g., a bug in the video access functionality might be
-exploited). Hence, to answer the        research questions we pose in this
+exploited). Hence, to answer the research questions we pose in this
 study, we need to be able to figure out exactly what features are
 supported by each browser version under analysis. In this section, we
 describe the methodology we followed in this work, and explain how we
@@ -16,15 +16,14 @@ created the datasets we used in our analyses.
 \label{sec:feature-gathering}
 
 In order to collect \textit{browser feature} sets from Firefox, Opera, and
-Chrome, we redirect the browser under analysis to a
-JavaScript-instrumented web page. We use the term \textit{feature} to
+Chrome, we crafted a special JavaScript-instrumented webpage that analyzes the visiting browser. We use the term \textit{feature} to
 describe JavaScript objects, methods, and property values built into the
 global namespace of the browser's JavaScript implementation (i.e., the
 \texttt{window} object).  Clearly, this definition is
 JavaScript-centric. However, it is unambiguous and naturally scalable,
 as we can automate the collection of features from many different
 browser implementations using standard scripting and crawling
-techniques. When the instrumented page is loaded by the browser, our
+techniques. When our instrumented page is loaded by the browser, our
 JavaScript is executed.  This code probes and iterates through the
 features supported by the browser. This is done by using JavaScript to
 traverse the tree of non-cyclic JavaScript object references accessible
@@ -49,12 +48,12 @@ and \textit{JavaScript APIs} interchangeably in our work.
 
 \subsection{Browser Testing Platform}
 
-In this work, we decided to target Google Chrome, Mozilla
+In this work, we target Google Chrome, Mozilla
 Firefox, and Opera browsers as they are well-known, popular browsers that have
 millions of users. Firefox possesses a distinct codebase unlike Chrome and Opera
 which are both based on Chromium. We gathered a copy of every major Firefox, Chrome, and Opera version that was
-released during the March 2016 to April 2020 timeframe (i.e., Chrome
-versions 49 to 81, Firefox versions 45 to 75, and Opera versions 36 to 68).
+released during the March 2016 to April 2020 timeframe, i.e., Chrome
+versions 49--81, Firefox versions 45--75, and Opera versions 36--68.
 
 To individually connect each browser version to our instrumented
 feature gathering web application, we mainly used the BrowserStack web

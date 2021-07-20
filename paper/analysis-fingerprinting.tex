@@ -13,16 +13,16 @@ is, we iterated through all the major Firefox and Chrome browser
 versions between 2016 and 2020, and tested their fingerprintability.
 
 In Chrome 49 (i.e., the oldest Chrome version in our analysis),
-there existed 139 APIs from the suspicious fingerprinting APIs list. Which
+there exist 139 APIs from the suspicious fingerprinting APIs list. Which
 means they could be used for fingerprinting. In Chrome
 81 (the newest Chrome version in our analysis), there
-existed 274 APIs from the suspicious fingerprinting APIs list. In short, the
+exist 274 APIs from the suspicious fingerprinting APIs list. In short, the
 number of APIs that could be used for fingerprinting Chrome versions
-were increasing over time. That is, the data suggest that Chrome is
-becoming easier to fingerprint.
+are increasing over time. That is, the data suggest that Chrome is
+becoming easier to fingerprint as it evolves over time.
 
 Compared to Chrome, Firefox 45 (i.e., the oldest version in our study)
-has 147 APIs from the suspicious fingerprinting APIs list. In constrast,
+has 147 APIs from the suspicious fingerprinting APIs list. In contrast,
 Firefox 75 (which is the latest Firefox version in our study) has 271
 fingerprinting APIs from the suspicious fingerprinting APIs list.
 Interestingly, though, Firefox 71 has 276 APIs from the suspicious
@@ -36,7 +36,7 @@ steps to prevent it (e.g.,~\cite{FirefoxFingerprinting}).
 In addition, Opera 36 (i.e., the oldest version in our study) contains 139
 suspicious fingerprinting APIs. On the other hand, Opera 68 (the latest Opera version in our measurement)
 is consist of 274 suspicious fingerprinting APIs. The trend is very similar to Google Chrome but there are minor
-differences at some points which could be seen in the figure \ref{fig:fingerprint-apis}.
+differences at some points which could be seen in Figure~\ref{fig:fingerprint-apis}.
 
 Figure \ref{fig:fingerprint-apis} depicts, in detail, the presence of
 fingerprinting APIs in Chrome, Firefox, and Opera that we measured. Note that
@@ -54,7 +54,7 @@ Chrome also enabled the WebGL 2.0 API that provides a new rendering
 context, and supports objects for the HTML5 Canvas elements. This
 context allows rendering using an API that conforms closely to the
 OpenGL ES 3.0
-API~\footnote{https://www.khronos.org/registry/webgl/specs/latest/2.0/}.
+API\footnote{https://www.khronos.org/registry/webgl/specs/latest/2.0/}.
 Similarly, in Firefox 51, we observed that the browser had also added
 WebGL2 support during that time. The same happened to Opera 43 since Chromium 56
 added WebGL2 support to its codebase.
@@ -74,7 +74,7 @@ their browsers more difficult to fingerprint.
     \label{fig:fingerprint-apis}
 \end{figure}
 
-As a part of our experiments, we also collected the feature sets for Firefox's Private Window,
+As part of our experiments, we also collected the feature sets for Firefox's Private Window,
 Google Chrome's Incognito, and Opera's Private Window. We measured the
 fingerprintability of the browsers in these modes. For Chrome, our results show
 that there is a small difference between the total number of features in regular

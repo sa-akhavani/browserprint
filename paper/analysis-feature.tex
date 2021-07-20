@@ -20,19 +20,19 @@ Chrome can be categorized into three main categories:
 
 \begin{itemize}
   
-\item Persistent Features: These are features that are added to a
+\item \textbf{Persistent Features}: These are features that are added to a
   specific version, and that continue to exist in every version that
   is released after the feature was introduced. We consider a feature
   to be ``persistent'' if it appears in at least two distinct browser
   versions.
       
-\item Non-Persistent Features: These are features that existed in
+\item \textbf{Non-Persistent Features}: These are features that existed in
   older versions of the browser, but were removed, and never appeared
   in newer versions of the browser again. We consider a feature to be
   ``non-persistent'' if it is absent in at least two distinct versions
-  of the browser under analysis.
+  of the browser versions under analysis.
       
-\item Recurring Features: These are features that are added and
+\item \textbf{Recurring Features}: These are features that are added and
   removed from the browser from time to time. That is, they are
   introduced, they are removed, and they might appear again at some
   point. Such features are typically being tested by the vendors, and
@@ -42,19 +42,19 @@ Chrome can be categorized into three main categories:
 
 Our analysis suggests that Chrome possesses 9,482 persistent, 711
 non-persistent, and 3,397 recurring features that it supports. In contrast,
-Opera contains 1391 persistent, 711 permanently removed, and 11502 recurring
+Opera contains 1,391 persistent, 711 permanently removed, and 11,502 recurring
 features. On the other hand, Firefox supports 6,237 persistent, 809 non-persistent, and
-152 recurring features. Note that Firefox, overall, supports a less
-number of features than Chrome and Opera. Also, our analysis suggests that Firefox,
+152 recurring features. Note that Firefox, overall, supports significantly fewer
+features than Chrome and Opera. Also, our analysis suggests that Firefox,
 compared to Chrome and Opera, is keeping fewer features (i.e., they are removing
-more) over time. Figure \ref{fig:feature-categories} illustrate the feature categories for
+more) over time. Figure \ref{fig:feature-categories} illustrates the feature categories for
 each browser vendor. It can be seen that Opera has a huge number of recurring features
 compared to Chrome and Firefox. This means that Opera tends to do more experiments
 on adding and removing specific features through time.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\columnwidth]{figures/feature-categories-bar.png}
+  \includegraphics[width=.9\columnwidth]{figures/feature-categories-bar.png}
   \caption{Feature category distribution for browsers.}
   \label{fig:feature-categories}
 \end{figure}
@@ -84,10 +84,10 @@ on adding and removing specific features through time.
   In this work, we also performed an analysis of the common features
   between Firefox, Chrome, and Opera. Since 2016, the total number of features
   introduced by these browsers is 15,945. Among all these features,
-  there exists only 4,843 common features among Firefox and Chrome -- which is
+  there exist only 4,843 common features among Firefox and Chrome -- which is
   approximately 30\% of the total number of features that these
-  vendors support. This number is the same between Firefox and Opera too and
-  there are 4,843 common features between them. On the other hand, Chrome and Opera
+  vendors support. This number is the same between Firefox and Opera too, with
+  4,843 common features between them. On the other hand, Chrome and Opera
   have a bigger set of common features. There exists 13,558 
   common features between Opera and Chrome -- which is approximately 85\% of the total
   number of features that these vendors support. The impact of this huge common features set
@@ -97,11 +97,11 @@ on adding and removing specific features through time.
   Note that although these browsers often offer very similar functionality,
   unsurprisingly, their codebase might be very different from each other.
   We are aware that Firefox's codebase is very different from Chrome's and Opera's.
-  Hence the APIs thourgh which these features are available are also often
-  significantly different. As a result, it is clear that
-  vulnerabilities in these browsers will be very specific to the
-  version and vendor. To the contrary, Chrome and Opera share the same codebase.
-  This leads to having a bigger set of common features between these two browsers.
+  Hence the API names through which these features are available are also often
+  significantly different. 
+  % As a result, it is clear that vulnerabilities in these browsers will be very specific to the version and vendor. 
+  To the contrary, Chrome and Opera share the same codebase.
+  This leads to having a bigger set of common features between these two browsers. Yet, as shown in Figure 1, how these features are enabled and when plays a significant role in distinguishing the two browsers, despite their shared codebase.
 
   Figures \ref{fig:ffaddremove} and \ref{fig:chaddremove} show the
   feature addition and removal trends for Firefox and Chrome. The data
@@ -110,9 +110,8 @@ on adding and removing specific features through time.
   numbers of features. However, Firefox seems to be more constant with
   respect to the number of new features added, and older features
   removed. Hence, Firefox seems to be more aggressive with respect to
-  removing older features from the browser, and hence, ``debloating''
-  the software. This trend is very similar for Chrome and Opera so we avoided
-  to put a separate graph for Opera.
+  removing older features from the browser, ``debloating'' this way 
+  the browser. Chrome and Opera share the same trend, so we omit a separate figure for Opera and leave Figure~\ref{fig:chaddremove} as a representative visualization of feature introduction and removal for Chromium-based browsers.
 
 \begin{figure}[ht]
     \centering
