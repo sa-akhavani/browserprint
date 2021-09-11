@@ -193,13 +193,13 @@ async function printFeatureResults(finalReport) {
         if (report.operaCategory == 'permanently removed')
             opremoved++
         if (report.operaCategory == 'experimental')
-            opexperimental++            
+            opexperimental++
         if (report.isCommonChFf)
             isCommonChFf++
         if (report.isCommonChOp)
-            isCommonChOp++            
+            isCommonChOp++
         if (report.isCommonFfOp)
-            isCommonFfOp++            
+            isCommonFfOp++
     }
     console.log(`firefox, ${ffadded}, ${ffremoved}, ${ffexperimental}`)
     console.log(`chrome, ${chadded}, ${chremoved}, ${chexperimental}`)
@@ -224,8 +224,16 @@ async function determineFeatureCategory(browserList, browserType) {
 
     if (sorted.length < 1)
         return null
-    if (sorted.length == 1)
+    if (sorted.length == 1) {
+        if (browserType === 'chrome' && sorted[0] === CHROME_END_VERSION) {
+            return 'permanently added'
+        } else if (browserType === 'firefox' && sorted[0] === FIREFOX_END_VERSION) {
+            return 'permanently added'
+        } else if (browserType === 'opera' && sorted[0] === OPERA_END_VERSION) {
+            return 'permanently added'
+        }
         return 'experimental'
+    }
     if (browserType == 'chrome') {
         if (sorted[sorted.length - 1] != CHROME_END_VERSION) {
             if (sorted[sorted.length - 2])
@@ -252,7 +260,15 @@ async function determineFeatureCategory(browserList, browserType) {
                 if (sorted[sorted.length - 2] != OPERA_END_VERSION - 1)
                     return 'permanently removed'
         } else {
-            if (sorted.length == OPERA_END_VERSION - sorted[0] + 1)
+            // opera 59 and 61 do not exist!
+            let offset = 0;
+            if (sorted[0] < 59 && sorted[sorted.length - 1] > 61)
+                offset += 2;
+            if (sorted[0] > 59 && sorted[0] < 61 && sorted[sorted.length - 1] > 61)
+                offset += 1;
+            if (sorted[0] < 59 && sorted[sorted.length - 1] < 61 && sorted[sorted.length - 1] > 59)
+                offset += 1;
+            if (sorted.length + offset == OPERA_END_VERSION - sorted[0] + 1)
                 return 'permanently added'
         }
         return 'experimental'
