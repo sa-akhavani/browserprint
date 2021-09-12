@@ -54,7 +54,7 @@ Chrome also enabled the WebGL 2.0 API that provides a new rendering
 context, and supports objects for the HTML5 Canvas elements. This
 context allows rendering using an API that conforms closely to the
 OpenGL ES 3.0
-API\footnote{https://www.khronos.org/registry/webgl/specs/latest/2.0/}.
+API\footnote{\url{https://www.khronos.org/registry/webgl/specs/latest/2.0/}}.
 Similarly, in Firefox 51, we observed that the browser had also added
 WebGL2 support during that time. The same happened to Opera 43 since Chromium 56
 added WebGL2 support to its codebase.
@@ -66,6 +66,17 @@ related to \texttt{WebGL2RenderingContext} which was added to Firefox
 observation is that browser vendors need to be extra careful when they
 implement and release new features if they are interested in making
 their browsers more difficult to fingerprint.
+
+We decided to analyze some minor spikes in Figure \ref{fig:fingerprint-apis}
+besides January 2017 which had the greatest spike in the graph.
+In September 2017, \texttt{NetworkInformation} API was added to Chrome 61
+that provided information about the connection a device is using to communicate with the network~\cite{network-information}.
+Also, in April 2017, \texttt{BaseAudioContext} API was added to Firefox 53.
+\texttt{BaseAudioContext} acts as a base definition for online and offline audio-processing graphs~\cite{base-audio-context}.
+Both of these APIs exist in our suspicious fingerprinting APIs list and potentially could be used to fingerprint a user.
+Surprisingly, these APIs were not even mentioned directly in Chrome 61~\cite{chrome-61-notes} and Firefox 53~\cite{firefox-53-notes} release notes.
+Hence, even a minor feature addition to a browser, which might not have been discussed in the release notes, could
+include fingerprintable APIs that increase the possibility of browser fingerprintability.
 
 \begin{figure}[ht]
     \centering
