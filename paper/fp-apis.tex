@@ -5,7 +5,7 @@ We conduct an in-depth analysis in order to determine which browser features are
 
 Our list of suspicious browser fingerprinting APIs contains a total of 313 JavaScript APIs. These APIs are considered suspicious because the purpose of using these API depends on the intent of the programmer who writes the code. 
 We call this list \textit{suspicious fingerprinting APIs} in this paper.
-In Panopticlick's research~\cite{panopticlick}, browser fingerprinting is achieved through a combination of APIs that seem innocent, such as \texttt{Navigator.plugins}, \texttt{Navigator.userAgent}, and \texttt{Screen.colorDepth}. These APIs provide functionality that matches their original objectives. However, they can be abused by creating a unique fingerprint of the client's browser due to exposing information that narrows down the diversity of visited users. We use two methods to assemble the list of fingerprinting APIs, literature review and experimental analysis.
+In Panopticlick's research~\cite{panopticlick}, browser fingerprinting is achieved through a combination of APIs that seem innocent, such as \texttt{Navigator.plugins}, \texttt{Navigator.userAgent}, and \texttt{Screen.colorDepth}. These APIs provide functionality that matches their original objectives. However, they can be abused by creating a unique fingerprint of the client's browser due to exposing information that narrows down the diversity of visited users. We use two methods to assemble the list of fingerprinting APIs: literature review and experimental analysis.
 %Based on our approach taken to collect APIs, there is no way to determine whether the source code is doing browser fingerprinting without the acknowledgment of the writer of the code. 
 
 \subsubsection{Literature Review}
