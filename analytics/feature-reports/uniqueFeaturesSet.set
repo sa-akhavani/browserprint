@@ -1,9 +1,0 @@
-Set {
-  'window.SVGViewSpec',
-  'window.WebGL2ComputeRenderingContext',
-  'window.DecompressionStream',
-  'window.CompressionStream',
-  'window.FeaturePolicy',
-  'window.PeriodicSyncManager',
-  'window.DOMCursor',
-  'window.crossOriginIsolated' }
