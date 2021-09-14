@@ -1,4 +1,0 @@
-total features: 15945
-isCommonChFf: 4843
-isCommonChOp: 13558
-isCommonFfOp: 4843
