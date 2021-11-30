@@ -1,6 +1,6 @@
 # Browserprint: An Analysis of the Impact of Browser Features on Fingerprintability and Web Privacy
 
-This repository contains all the source codes and datasets related to the paper: `Browserprint: An Analysis of the Impact of Browser Features on Fingerprintability and Web Privacy`. If you are planning to use any of the codes or datasets in this paper, please cite this paper properly.
+This repository contains all the source codes and datasets related to the paper: `Browserprint: An Analysis of the Impact of Browser Features on Fingerprintability and Web Privacy`. If you are planning to use any of the codes or datasets in this paper, please cite this paper properly. More information about the paper could be accessed [here]( https://link.springer.com/chapter/10.1007/978-3-030-91356-4_9)
 
 All the datasets and reports generated in our research could be found in ```datasets``` directory.
 
